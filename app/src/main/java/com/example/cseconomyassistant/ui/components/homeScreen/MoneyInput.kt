@@ -37,7 +37,6 @@ fun MoneyInput(
             fontSize = 14.sp,
             modifier = Modifier.padding(bottom = 4.dp)
         )
-
         OutlinedTextField(
             value = text,
             onValueChange = { newValue ->

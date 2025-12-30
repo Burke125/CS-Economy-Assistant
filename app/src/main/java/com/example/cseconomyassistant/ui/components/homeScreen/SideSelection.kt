@@ -21,19 +21,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.R
 import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.ui.theme.Background
 import com.example.cseconomyassistant.ui.theme.CTBlue
 import com.example.cseconomyassistant.ui.theme.TOrange
+import com.example.cseconomyassistant.ui.theme.TextPrimary
+
 
 @Composable
 fun SideSelection(
     selectedSide: Side,
     onSideSelected: (Side) -> Unit
 ) {
+    Text(
+        text = "Select Side",
+        color = TextPrimary,
+        fontSize = 14.sp,
+    )
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.Top,
         modifier = Modifier
             .padding(start = 10.dp, end = 10.dp)
@@ -58,20 +66,19 @@ fun SideSelection(
         ){
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.shield),
-                    contentDescription = "Counter-Terrorist",
-                    tint = (if(selectedSide == Side.CT) Background
-                            else CTBlue
-                            ),
-                    modifier = Modifier.size(24.dp)
-                )
+            ) {       Icon(
+                painter = painterResource(R.drawable.shield),
+                contentDescription = "Counter-Terrorist",
+                tint = (if(selectedSide == Side.CT) Background
+                else CTBlue
+                        ),
+                modifier = Modifier.size(24.dp)
+            )
                 Spacer(Modifier.height(4.dp))
                 Text(
                     text = "Counter-Terrorist",
                     color = (if (selectedSide ==  Side.CT) Background
-                            else CTBlue
+                    else CTBlue
                             )
                 )
             }
@@ -100,7 +107,7 @@ fun SideSelection(
                     painter = painterResource(id = R.drawable.bomb),
                     contentDescription = "Terrorist",
                     tint = (if(selectedSide == Side.T) Background
-                            else TOrange
+                    else TOrange
                             ),
                     modifier = Modifier.size(24.dp)
                 )

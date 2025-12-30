@@ -23,7 +23,7 @@ fun ScreenTitle(title: String, subtitle: String) {
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .padding(start = 25.dp, top = 15.dp, end = 25.dp)
+            .padding(start = 20.dp, top = 15.dp, end = 20.dp)
             .fillMaxWidth()
             .border(2.dp, BorderSubtle, RoundedCornerShape(12.dp))
     ) {

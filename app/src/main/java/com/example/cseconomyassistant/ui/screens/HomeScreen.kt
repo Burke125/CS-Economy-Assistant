@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cseconomyassistant.data.model.Side
+import com.example.cseconomyassistant.ui.components.homeScreen.LossStreakInput
 import com.example.cseconomyassistant.ui.components.homeScreen.MoneyInput
 import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
 import com.example.cseconomyassistant.ui.components.homeScreen.SideSelection
@@ -49,6 +50,13 @@ fun HomeScreen(navController: NavController) {
             currentMoney = currentMoney,
             onMoneyChange = { newMoney -> currentMoney = newMoney }
         )
+
+        var lossStreak by remember { mutableIntStateOf(0) }
+        LossStreakInput(
+            selectedLoss = lossStreak,
+            onLossSelected = { lossStreak = it }
+        )
+
         Spacer(modifier = Modifier.weight(1f))
 
         Button(

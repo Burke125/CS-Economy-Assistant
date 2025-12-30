@@ -3,15 +3,7 @@ package com.example.cseconomyassistant.ui.components.homeScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -24,101 +16,91 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.R
 import com.example.cseconomyassistant.data.model.Side
-import com.example.cseconomyassistant.ui.theme.Background
-import com.example.cseconomyassistant.ui.theme.CTBlue
-import com.example.cseconomyassistant.ui.theme.TOrange
-import com.example.cseconomyassistant.ui.theme.TextPrimary
-
+import com.example.cseconomyassistant.ui.theme.*
 
 @Composable
 fun SideSelection(
     selectedSide: Side,
     onSideSelected: (Side) -> Unit
 ) {
-    Text(
-        text = "Select Side",
-        color = TextPrimary,
-        fontSize = 14.sp,
-    )
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalAlignment = Alignment.Top,
-        modifier = Modifier
-            .padding(start = 10.dp, end = 10.dp)
-            .fillMaxWidth()
-    ){
-        Box(
+    Column {
+        Text(
+            text = "Select Side",
+            color = TextPrimary,
+            fontSize = 14.sp,
             modifier = Modifier
-                .weight(1f)
-                .clickable{onSideSelected(Side.CT)}
-                .background(
-                    if(selectedSide == Side.CT) CTBlue
-                    else Color.Transparent,
-                    RoundedCornerShape(8.dp)
-                )
-                .border(
-                    3.dp,
-                    CTBlue,
-                    RoundedCornerShape(8.dp)
-                )
-                .padding(12.dp),
-            contentAlignment = Alignment.Center
-        ){
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {       Icon(
-                painter = painterResource(R.drawable.shield),
-                contentDescription = "Counter-Terrorist",
-                tint = (if(selectedSide == Side.CT) Background
-                else CTBlue
-                        ),
+                .padding(start = 4.dp, bottom = 4.dp)
+                .fillMaxWidth()
+        )
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.Top,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            SideCard(
+                isSelected = selectedSide == Side.CT,
+                color = CTBlue,
+                icon = R.drawable.shield,
+                title = "Counter-Terrorist",
+                modifier = Modifier.weight(1f)
+            ) { onSideSelected(Side.CT) }
+
+            SideCard(
+                isSelected = selectedSide == Side.T,
+                color = TOrange,
+                icon = R.drawable.bomb,
+                title = "Terrorist",
+                modifier = Modifier.weight(1f)
+            ) { onSideSelected(Side.T) }
+        }
+    }
+}
+
+@Composable
+private fun SideCard(
+    isSelected: Boolean,
+    color: Color,
+    icon: Int,
+    title: String,
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .clickable { onClick() }
+            .background(
+                if (isSelected) color else Color.Transparent,
+                RoundedCornerShape(8.dp)
+            )
+            .border(
+                width = 3.dp,
+                color = color,
+                shape = RoundedCornerShape(8.dp)
+            )
+            .size(
+                width = 175.dp,
+                height = 80.dp
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                painter = painterResource(icon),
+                contentDescription = title,
+                tint = if (isSelected) Background else color,
                 modifier = Modifier.size(24.dp)
             )
-                Spacer(Modifier.height(4.dp))
-                Text(
-                    text = "Counter-Terrorist",
-                    color = (if (selectedSide ==  Side.CT) Background
-                    else CTBlue
-                            )
-                )
-            }
-        }
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .clickable{onSideSelected(Side.T)}
-                .background(
-                    if(selectedSide == Side.T) TOrange
-                    else Color.Transparent,
-                    RoundedCornerShape(8.dp)
-                )
-                .border(
-                    3.dp,
-                    TOrange,
-                    RoundedCornerShape(8.dp)
-                )
-                .padding(12.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.bomb),
-                    contentDescription = "Terrorist",
-                    tint = (if(selectedSide == Side.T) Background
-                    else TOrange
-                            ),
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(Modifier.height(4.dp))
-                Text(
-                    text = "Terrorist",
-                    color = (if (selectedSide ==  Side.T) Background
-                    else TOrange
-                            )
-                )
-            }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Text(
+                text = title,
+                color = if (isSelected) Background else color
+            )
         }
     }
 }

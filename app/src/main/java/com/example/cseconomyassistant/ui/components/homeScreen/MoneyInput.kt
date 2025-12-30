@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -15,9 +16,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.R
 import com.example.cseconomyassistant.ui.theme.BorderSubtle
 import com.example.cseconomyassistant.ui.theme.CTBlue
 import com.example.cseconomyassistant.ui.theme.TextPrimary
@@ -32,10 +35,10 @@ fun MoneyInput(
 
     Column {
         Text(
-            text = "Current Money",
+            text = "$  Current Money",
             color = TextPrimary,
             fontSize = 14.sp,
-            modifier = Modifier.padding(bottom = 4.dp)
+            modifier = Modifier.padding(start = 4.dp, bottom = 4.dp)
         )
         OutlinedTextField(
             value = text,

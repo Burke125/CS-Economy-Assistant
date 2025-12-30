@@ -18,12 +18,14 @@ import com.example.cseconomyassistant.ui.theme.TextPrimary
 import com.example.cseconomyassistant.ui.theme.TextSecondary
 
 @Composable
-fun ScreenTitle(title: String, subtitle: String) {
+fun ScreenTitle(
+    title: String,
+    subtitle: String
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .padding(start = 20.dp, top = 15.dp, end = 20.dp)
             .fillMaxWidth()
             .border(2.dp, BorderSubtle, RoundedCornerShape(12.dp))
     ) {
@@ -32,13 +34,13 @@ fun ScreenTitle(title: String, subtitle: String) {
             color = TextPrimary,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(start = 20.dp, top = 15.dp)
+            modifier = Modifier.padding(start = 20.dp, top = 20.dp)
         )
         Text(
             text = subtitle,
             color = TextSecondary,
             fontSize = 14.sp,
-            modifier = Modifier.padding(start = 20.dp, bottom = 15.dp)
+            modifier = Modifier.padding(start = 20.dp, bottom = 20.dp)
         )
     }
 }

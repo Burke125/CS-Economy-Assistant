@@ -62,7 +62,7 @@ fun SideSelection(
                 color = TOrange,
                 icon = R.drawable.bomb,
                 title = "Terrorist",
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             ) { onSideSelected(Side.T) }
         }
     }
@@ -90,7 +90,7 @@ private fun SideCard(
                 shape = RoundedCornerShape(8.dp)
             )
             .size(
-                width = 175.dp,
+                width = 185.dp,
                 height = 80.dp
             ),
         contentAlignment = Alignment.Center

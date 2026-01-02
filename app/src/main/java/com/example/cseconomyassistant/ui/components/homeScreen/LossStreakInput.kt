@@ -38,7 +38,7 @@ fun LossStreakInput(
         )
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(3.dp),
+            horizontalArrangement = Arrangement.spacedBy(7.5.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             (0..4).forEach { value ->

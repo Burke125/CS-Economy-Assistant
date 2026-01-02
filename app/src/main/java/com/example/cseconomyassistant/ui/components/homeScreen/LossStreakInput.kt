@@ -15,18 +15,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.ui.theme.TextPrimary
 import com.example.cseconomyassistant.ui.theme.BorderSubtle
 import com.example.cseconomyassistant.ui.theme.TOrange
+import com.example.cseconomyassistant.ui.theme.TextSecondary
 
 @Composable
 fun LossStreakInput(
     selectedLoss: Int,
     onLossSelected: (Int) -> Unit
 ) {
+    val lossBonus = calculateLossBonus(selectedLoss)
+
     Column {
         Text(
             text = "Loss Streak",
@@ -45,8 +47,15 @@ fun LossStreakInput(
                     isSelected = value == selectedLoss,
                     onClick = { onLossSelected(value) }
                 )
+
             }
         }
+        Text(
+            text = "Next Round Loss Bonus: \$$lossBonus",
+            color = TextSecondary,
+            fontSize = 12.sp,
+            modifier = Modifier.padding(top = 2.dp)
+        )
     }
 }
 
@@ -61,12 +70,12 @@ private fun LossStreakChip(
             .clickable { onClick() }
             .background(
                 if (isSelected) TOrange else Color.Transparent,
-                RoundedCornerShape(2.dp)
+                RoundedCornerShape(4.dp)
             )
             .border(
                 width = 1.dp,
                 color = if(isSelected) TOrange else BorderSubtle,
-                shape = RoundedCornerShape(2.dp)
+                shape = RoundedCornerShape(4.dp)
             )
             .size(
                 width = 70.dp,
@@ -83,6 +92,16 @@ private fun LossStreakChip(
                 fontSize = 16.sp,
             )
         }
+    }
+}
+
+private fun calculateLossBonus(lossStreak: Int): Int{
+    return when (lossStreak){
+        0 -> 1400
+        1 -> 1900
+        2 -> 2400
+        3 -> 2900
+        else -> 3400
     }
 }
 

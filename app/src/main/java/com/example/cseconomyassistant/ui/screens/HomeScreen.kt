@@ -24,12 +24,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.ui.components.homeScreen.LossStreakInput
 import com.example.cseconomyassistant.ui.components.homeScreen.MoneyInput
+import com.example.cseconomyassistant.ui.components.homeScreen.PistolRoundToggle
 import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
 import com.example.cseconomyassistant.ui.components.homeScreen.SideSelection
 import com.example.cseconomyassistant.ui.theme.Background
 
 @Composable
 fun HomeScreen(navController: NavController) {
+    Modifier.padding(15.dp)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,6 +45,12 @@ fun HomeScreen(navController: NavController) {
         SideSelection(
             selectedSide = selectedSide,
             onSideSelected = { newSide -> selectedSide = newSide }
+        )
+
+        var isPistolRound by remember { mutableStateOf(false)}
+        PistolRoundToggle(
+            isPistolRound = isPistolRound,
+            onToggle = { isPistolRound = it }
         )
 
         var currentMoney by remember { mutableIntStateOf(800) }

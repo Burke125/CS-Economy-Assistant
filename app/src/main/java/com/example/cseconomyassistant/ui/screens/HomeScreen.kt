@@ -21,7 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.data.model.Weapon
 import com.example.cseconomyassistant.ui.components.homeScreen.LossStreakInput
-import com.example.cseconomyassistant.ui.components.homeScreen.MoneyInput
+import com.example.cseconomyassistant.ui.components.homeScreen.MoneyInputSlider
 import com.example.cseconomyassistant.ui.components.homeScreen.PistolRoundToggle
 import com.example.cseconomyassistant.ui.components.homeScreen.SavedWeaponDropdown
 import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
@@ -29,7 +29,15 @@ import com.example.cseconomyassistant.ui.components.homeScreen.SideSelection
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Modifier.padding(15.dp)
+    var selectedSide by remember { mutableStateOf(Side.CT) }
+    var isPistolRound by remember { mutableStateOf(false)}
+    var currentMoney by remember { mutableIntStateOf(800) }
+    var lossStreak by remember { mutableIntStateOf(0) }
+    var hasSavedWeapon by remember { mutableStateOf(false) }
+    var savedWeapon by remember { mutableStateOf<Weapon?>(null) }
+
+    val inputsLocked = isPistolRound
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,38 +46,43 @@ fun HomeScreen(navController: NavController) {
     ) {
         ScreenTitle("Round Setup", "Configure your current round context")
 
-        var selectedSide by remember { mutableStateOf(Side.CT) }
         SideSelection(
             selectedSide = selectedSide,
             onSideSelected = { newSide -> selectedSide = newSide }
         )
 
-        var isPistolRound by remember { mutableStateOf(false)}
         PistolRoundToggle(
             isPistolRound = isPistolRound,
-            onToggle = { isPistolRound = it }
+            onToggle = { enabled -> isPistolRound = enabled
+                if(enabled){
+                    currentMoney = 800
+                    lossStreak = 1
+                    hasSavedWeapon = false
+                    savedWeapon = null
+                }else{
+                    lossStreak = 0
+                }
+            }
         )
 
-        var currentMoney by remember { mutableIntStateOf(800) }
-        MoneyInput(
+        MoneyInputSlider(
             currentMoney = currentMoney,
-            onMoneyChange = { newMoney -> currentMoney = newMoney }
+            onMoneyChange = { currentMoney = it },
+            locked = inputsLocked
         )
 
-        var lossStreak by remember { mutableIntStateOf(0) }
         LossStreakInput(
             selectedLoss = lossStreak,
-            onLossSelected = { lossStreak = it }
+            onLossSelected = { lossStreak = it },
+            locked = inputsLocked
         )
-
-        var hasSavedWeapon by remember { mutableStateOf(false) }
-        var savedWeapon by remember { mutableStateOf<Weapon?>(null) }
 
         SavedWeaponDropdown(
             hasSavedWeapon = hasSavedWeapon,
             selectedWeapon = savedWeapon,
             onSavedWeaponToggle = { hasSavedWeapon = it },
-            onWeaponSelected = { savedWeapon = it }
+            onWeaponSelected = { savedWeapon = it },
+            locked = inputsLocked
         )
 
         Button(

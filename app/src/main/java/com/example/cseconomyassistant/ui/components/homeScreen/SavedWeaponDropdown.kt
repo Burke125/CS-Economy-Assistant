@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -34,10 +33,10 @@ fun SavedWeaponDropdown(
     hasSavedWeapon: Boolean,
     selectedWeapon: Weapon?,
     onSavedWeaponToggle: (Boolean) -> Unit,
-    onWeaponSelected: (Weapon?) -> Unit
+    onWeaponSelected: (Weapon?) -> Unit,
+    locked: Boolean
 ) {
     Column {
-        // Toggle row
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -54,15 +53,13 @@ fun SavedWeaponDropdown(
                 onCheckedChange = {
                     onSavedWeaponToggle(it)
                     if (!it) onWeaponSelected(null)
-                }
+                },
+                enabled = !locked
             )
         }
-
-        // Dropdown only if toggle is ON
         if (hasSavedWeapon) {
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Filter primary weapons only
             val primaryWeapons = weapons.filter {
                 it.type != WeaponType.PISTOL &&
                         it.type != WeaponType.OTHER
@@ -72,12 +69,13 @@ fun SavedWeaponDropdown(
 
             ExposedDropdownMenuBox(
                 expanded = expanded,
-                onExpandedChange = { expanded = !expanded }
+                onExpandedChange = { if(!locked) expanded = !expanded }
             ) {
                 TextField(
                     value = selectedWeapon?.name ?: "Select saved weapon",
                     onValueChange = {},
                     readOnly = true,
+                    enabled = !locked,
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                     modifier = Modifier.fillMaxWidth().menuAnchor()
                 )
@@ -86,18 +84,15 @@ fun SavedWeaponDropdown(
                     expanded = expanded,
                     onDismissRequest = { expanded = false }
                 ) {
-                    // "None" option
                     DropdownMenuItem(
                         text = { Text("No saved weapon") },
                         onClick = {
                             onWeaponSelected(null)
                             expanded = false
-                        }
+                        },
+                        enabled = !locked
                     )
 
-                    Divider()
-
-                    // All primary weapons
                     primaryWeapons.forEach { weapon ->
                         DropdownMenuItem(
                             text = {
@@ -112,7 +107,8 @@ fun SavedWeaponDropdown(
                             onClick = {
                                 onWeaponSelected(weapon)
                                 expanded = false
-                            }
+                            },
+                            enabled = !locked
                         )
                     }
                 }

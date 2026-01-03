@@ -25,7 +25,8 @@ import com.example.cseconomyassistant.ui.theme.TextSecondary
 @Composable
 fun LossStreakInput(
     selectedLoss: Int,
-    onLossSelected: (Int) -> Unit
+    onLossSelected: (Int) -> Unit,
+    locked: Boolean
 ) {
     val lossBonus = calculateLossBonus(selectedLoss)
 
@@ -45,6 +46,7 @@ fun LossStreakInput(
                 LossStreakChip(
                     value = value,
                     isSelected = value == selectedLoss,
+                    locked = locked,
                     onClick = { onLossSelected(value) }
                 )
 
@@ -63,11 +65,12 @@ fun LossStreakInput(
 private fun LossStreakChip(
     value: Int,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    locked: Boolean
 ) {
     Box(
         modifier = Modifier
-            .clickable { onClick() }
+            .clickable(enabled = !locked) { onClick() }
             .background(
                 if (isSelected) TOrange else Color.Transparent,
                 RoundedCornerShape(4.dp)
@@ -104,14 +107,3 @@ private fun calculateLossBonus(lossStreak: Int): Int{
         else -> 3400
     }
 }
-
-/*
-@Preview()
-@Composable
-fun LossStreakInputPreview() {
-    LossStreakInput(
-        selectedLoss = 0,
-        onLossSelected = {}
-    )
-}
-*/

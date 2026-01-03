@@ -4,5 +4,6 @@ enum class EquipmentSlot {
     PRIMARY,
     SECONDARY,
     UTILITY,
-    MELEE
+    MELEE,
+    NONE
 }

@@ -8,5 +8,6 @@ data class Equipment(
     val name: String,
     val price: Int,
     val side: Side,
+    val equipmentSlot: EquipmentSlot,
     val description: String
 )

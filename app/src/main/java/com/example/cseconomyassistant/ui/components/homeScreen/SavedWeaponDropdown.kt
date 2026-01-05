@@ -101,7 +101,7 @@ fun SavedWeaponDropdown(
                                 ) {
                                     Text(weapon.name)
                                     Spacer(modifier = Modifier.weight(1f))
-                                    Text("\$${weapon.price}", fontSize = 12.sp)
+                                    Text("$${weapon.price}", fontSize = 12.sp)
                                 }
                             },
                             onClick = {

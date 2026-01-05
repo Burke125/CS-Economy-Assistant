@@ -50,14 +50,16 @@ fun SideSelection(
                 .fillMaxWidth()
         ) {
             SideCard(
+                selectedSide = Side.CT,
                 isSelected = selectedSide == Side.CT,
                 color = CTBlue,
                 icon = R.drawable.shield,
                 title = "Counter-Terrorist",
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             ) { onSideSelected(Side.CT) }
 
             SideCard(
+                selectedSide = Side.T,
                 isSelected = selectedSide == Side.T,
                 color = TOrange,
                 icon = R.drawable.bomb,
@@ -70,6 +72,7 @@ fun SideSelection(
 
 @Composable
 private fun SideCard(
+    selectedSide: Side,
     isSelected: Boolean,
     color: Color,
     icon: Int,
@@ -86,7 +89,7 @@ private fun SideCard(
             )
             .border(
                 width = 3.dp,
-                color = color,
+                color = if(selectedSide == Side.CT) CTBlueDark else TOrangeDark,
                 shape = RoundedCornerShape(8.dp)
             )
             .size(

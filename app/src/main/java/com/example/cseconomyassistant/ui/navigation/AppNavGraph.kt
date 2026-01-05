@@ -7,32 +7,55 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.cseconomyassistant.ui.screens.EconomyGuideScreen
-import com.example.cseconomyassistant.ui.screens.HistoryScreen
-import com.example.cseconomyassistant.ui.screens.HomeScreen
-import com.example.cseconomyassistant.ui.screens.MapScreen
-import com.example.cseconomyassistant.ui.screens.WeaponScreen
+import com.example.cseconomyassistant.data.database.equipment
+import com.example.cseconomyassistant.data.database.weapons
+import com.example.cseconomyassistant.data.model.Equipment
+import com.example.cseconomyassistant.data.model.Weapon
+import com.example.cseconomyassistant.ui.screens.*
 
-
-sealed class Screen(val route: String, val title: String) {
-    object Home : Screen("home", "Home")
-    object Weapons : Screen("weapons", "Weapons")
-    object Maps : Screen("maps", "Maps")
-    object Guide : Screen("guide", "Guide")
-    object History : Screen("history", "History")
-}
 
 @Composable
 fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route,
-        modifier = modifier.verticalScroll(rememberScrollState())
+
     ) {
         composable(Screen.Home.route) { HomeScreen(navController) }
-        composable(Screen.Weapons.route) { WeaponScreen() }
+        composable(Screen.Equipment.route) {
+            EquipmentScreen(
+                onWeaponClick = { weapon ->
+                    navController.navigate("weapon_detail/${weapon.id}")
+                },
+                onEquipmentClick = { equipment ->
+                    navController.navigate("equipment_detail/${equipment.id}")
+                }
+            )
+        }
         composable(Screen.Maps.route) { MapScreen() }
         composable(Screen.Guide.route) { EconomyGuideScreen() }
         composable(Screen.History.route) { HistoryScreen() }
+
+        composable(
+            route = "weapon_detail/{weaponId}"
+        ) { backStackEntry ->
+            val weaponId = backStackEntry.arguments?.getString("weaponId") ?: return@composable
+            val weapon = weapons.find { it.id == weaponId } ?: return@composable
+            WeaponDetailScreen(
+                weapon = weapon,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = "equipment_detail/{equipmentId}"
+        ) { backStackEntry ->
+            val equipmentId = backStackEntry.arguments?.getString("equipmentId") ?: return@composable
+            val equipmentItem = equipment.find { it.id == equipmentId } ?: return@composable
+            EquipmentDetailScreen(
+                equipment = equipmentItem,
+                onBack = { navController.popBackStack() }
+            )
+        }
     }
 }

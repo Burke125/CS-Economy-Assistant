@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.ui.theme.Background
 import com.example.cseconomyassistant.ui.theme.TOrange
+import com.example.cseconomyassistant.ui.theme.TOrangeDark
 import com.example.cseconomyassistant.ui.theme.TextPrimary
 
 
@@ -43,7 +44,7 @@ fun PistolRoundToggle(
                 )
                 .border(
                     width = 2.dp,
-                    color = TOrange,
+                    color = TOrangeDark,
                     shape = RoundedCornerShape(8.dp)
                 )
                 .clickable { onToggle(!isPistolRound) }

@@ -6,28 +6,18 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.example.cseconomyassistant.ui.theme.Background
-import com.example.cseconomyassistant.ui.theme.CTBlue
-import com.example.cseconomyassistant.ui.theme.SurfaceVariant
-import com.example.cseconomyassistant.ui.theme.TextPrimary
-import com.example.cseconomyassistant.ui.theme.TextSecondary
+import com.example.cseconomyassistant.ui.theme.*
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val screens = listOf(
         Screen.Home,
-        Screen.Weapons,
+        Screen.Equipment,
         Screen.Maps,
         Screen.Guide,
         Screen.History
@@ -46,20 +36,16 @@ fun BottomNavigationBar(navController: NavController) {
                     Icon(
                         imageVector = when (screen) {
                             Screen.Home -> Icons.Default.Home
-                            Screen.Weapons -> Icons.AutoMirrored.Filled.List
+                            Screen.Equipment -> Icons.AutoMirrored.Filled.List
                             Screen.Maps -> Icons.Default.Map
                             Screen.Guide -> Icons.Default.Info
                             Screen.History -> Icons.Default.History
+                            else -> Icons.Default.Home
                         },
                         contentDescription = screen.title
                     )
                 },
-                label = {
-                    Text(
-                        screen.title,
-                        fontSize = 12.sp
-                    )
-                },
+                label = { Text(screen.title, fontSize = 12.sp) },
                 selected = currentRoute == screen.route,
                 onClick = {
                     navController.navigate(screen.route) {
@@ -80,13 +66,4 @@ fun BottomNavigationBar(navController: NavController) {
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun BottomNavigationBarPreview() {
-    val navController = rememberNavController()
-    BottomNavigationBar(
-        navController = navController
-    )
 }

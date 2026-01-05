@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.ui.theme.TextPrimary
 import com.example.cseconomyassistant.ui.theme.BorderSubtle
 import com.example.cseconomyassistant.ui.theme.TOrange
+import com.example.cseconomyassistant.ui.theme.TOrangeDark
 import com.example.cseconomyassistant.ui.theme.TextSecondary
 
 @Composable
@@ -77,7 +78,7 @@ private fun LossStreakChip(
             )
             .border(
                 width = 1.dp,
-                color = if(isSelected) TOrange else BorderSubtle,
+                color = if(isSelected) TOrangeDark else BorderSubtle,
                 shape = RoundedCornerShape(4.dp)
             )
             .size(

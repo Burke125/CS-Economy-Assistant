@@ -21,7 +21,6 @@ import com.example.cseconomyassistant.data.model.EquipmentCategory
 import com.example.cseconomyassistant.ui.theme.BorderSubtle
 import com.example.cseconomyassistant.ui.theme.SurfaceVariant
 
-
 @Composable
 fun EquipmentSelection(
     equipmentCategory: EquipmentCategory,
@@ -78,5 +77,3 @@ private fun EquipmentCategoryCard(
         )
     }
 }
-
-

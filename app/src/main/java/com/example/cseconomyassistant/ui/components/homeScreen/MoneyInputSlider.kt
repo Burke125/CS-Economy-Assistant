@@ -56,7 +56,7 @@ fun MoneyInputSlider(
                 onMoneyChange(rounded)
             },
             valueRange = 0f..16000f,
-            steps = 319, // (16000 / 50) - 1
+            steps = 319,
             enabled = !locked
         )
 

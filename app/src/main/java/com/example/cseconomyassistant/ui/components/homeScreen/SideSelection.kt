@@ -19,15 +19,6 @@ import com.example.cseconomyassistant.R
 import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.ui.theme.*
 
-@Preview
-@Composable
-fun SideSelectionPreview() {
-    SideSelection(
-        selectedSide = Side.CT,
-        onSideSelected = {}
-    )
-}
-
 @Composable
 fun SideSelection(
     selectedSide: Side,
@@ -42,7 +33,6 @@ fun SideSelection(
                 .padding(start = 4.dp, bottom = 4.dp)
                 .fillMaxWidth()
         )
-
         Row(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.Top,

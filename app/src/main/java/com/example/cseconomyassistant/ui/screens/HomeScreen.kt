@@ -16,10 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.data.model.Weapon
 import com.example.cseconomyassistant.ui.components.homeScreen.LossStreakInput
@@ -44,10 +42,13 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp),:
+            .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        ScreenTitle("Round Setup", "Configure your current round context")
+        ScreenTitle(
+            title = "Round Setup",
+            subtitle = "Configure your current round context"
+        )
 
         SideSelection(
             selectedSide = selectedSide,
@@ -94,15 +95,5 @@ fun HomeScreen(navController: NavController) {
         ) {
             Text("Calculate Loadout")
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    val navController = rememberNavController()
-
-    com.example.cseconomyassistant.ui.theme.CSEconomyAssistantTheme(darkTheme = true) {
-        HomeScreen(navController = navController)
     }
 }

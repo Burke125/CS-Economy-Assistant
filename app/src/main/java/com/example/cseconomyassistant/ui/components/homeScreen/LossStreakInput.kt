@@ -54,7 +54,7 @@ fun LossStreakInput(
             }
         }
         Text(
-            text = "Next Round Loss Bonus: \$$lossBonus",
+            text = "Next Round Loss Bonus: $$lossBonus",
             color = TextSecondary,
             fontSize = 12.sp,
             modifier = Modifier.padding(top = 2.dp)

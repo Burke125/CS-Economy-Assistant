@@ -1,21 +1,23 @@
 package com.example.cseconomyassistant.ui.navigation
 
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cseconomyassistant.data.database.equipment
 import com.example.cseconomyassistant.data.database.weapons
-import com.example.cseconomyassistant.data.model.Equipment
-import com.example.cseconomyassistant.data.model.Weapon
 import com.example.cseconomyassistant.ui.screens.*
 
+sealed class Screen(val route: String, val title: String) {
+    object Home : Screen("home", "Home")
+    object Equipment : Screen("equipment", "Equipment")
+    object Maps : Screen("maps", "Maps")
+    object Guide : Screen("guide", "Guide")
+    object History : Screen("history", "History")
+}
 
 @Composable
-fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route,

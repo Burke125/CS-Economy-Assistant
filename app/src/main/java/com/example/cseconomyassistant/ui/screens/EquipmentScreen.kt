@@ -1,11 +1,8 @@
 package com.example.cseconomyassistant.ui.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cseconomyassistant.data.model.Equipment
 import com.example.cseconomyassistant.data.model.EquipmentCategory
@@ -46,13 +43,4 @@ fun EquipmentScreen(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun EquipmentScreenPreview(){
-    EquipmentScreen(
-        onWeaponClick = {},
-        onEquipmentClick = {}
-    )
 }

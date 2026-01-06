@@ -8,7 +8,7 @@ import com.example.cseconomyassistant.data.model.Equipment
 import com.example.cseconomyassistant.data.model.EquipmentCategory
 import com.example.cseconomyassistant.data.model.Weapon
 import com.example.cseconomyassistant.ui.components.equipmentScreen.EquipmentSection
-import com.example.cseconomyassistant.ui.components.equipmentScreen.ScreenTitle
+import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
 import com.example.cseconomyassistant.ui.components.equipmentScreen.EquipmentSelection
 import com.example.cseconomyassistant.ui.components.equipmentScreen.WeaponSection
 

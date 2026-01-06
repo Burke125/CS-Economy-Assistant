@@ -1,8 +1,6 @@
 package com.example.cseconomyassistant.data.model
 
-import androidx.annotation.DrawableRes
-
-data class Map(
+data class GameMap(
     val images: List<MapVisual>,
     val id: String,
     val name: String,

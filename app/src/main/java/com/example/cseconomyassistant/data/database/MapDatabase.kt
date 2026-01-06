@@ -1,11 +1,11 @@
 package com.example.cseconomyassistant.data.database
 
 import com.example.cseconomyassistant.R
-import com.example.cseconomyassistant.data.model.Map
+import com.example.cseconomyassistant.data.model.GameMap
 import com.example.cseconomyassistant.data.model.MapVisual
 
-val maps: List<Map> = listOf(
-    Map(
+val gameMaps: List<GameMap> = listOf(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.ancient),
             MapVisual("Radar", R.drawable.ancient_radar)
@@ -18,7 +18,7 @@ val maps: List<Map> = listOf(
         location = "Mexico",
         tip = "A structured and discipline-focused map emphasizing strong defensive setups, calculated utility usage, and precise control of key chokepoints."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.dust_2),
             MapVisual("Radar", R.drawable.dust_2_radar)
@@ -31,7 +31,7 @@ val maps: List<Map> = listOf(
         location = "Morocco",
         tip = "An aim-centric and mechanically demanding map that rewards strong individual performance, precise peeks, and simple yet effective tactical structures."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.inferno),
             MapVisual("Radar", R.drawable.inferno_radar)
@@ -44,7 +44,7 @@ val maps: List<Map> = listOf(
         location = "Italy",
         tip = "A highly tactical and utility-dependent map, emphasizing map control, disciplined rotations, and synchronized grenade usage to dictate pace and territory."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.mirage),
             MapVisual("Radar", R.drawable.mirage_radar)
@@ -57,7 +57,7 @@ val maps: List<Map> = listOf(
         location = "Morocco",
         tip = "A fundamentals-driven, balanced map that rewards strong mid control, clean aim duels, and coordinated team play across both short and long ranges."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.nuke),
             MapVisual("Upper Radar", R.drawable.nuke_upper_radar),
@@ -71,7 +71,7 @@ val maps: List<Map> = listOf(
         location = "United States",
         tip = "A strategically demanding and rotation-heavy map that rewards deep map knowledge, strong communication, and advanced team coordination across multiple levels."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.overpass),
             MapVisual("Radar", R.drawable.overpass_radar)
@@ -84,7 +84,7 @@ val maps: List<Map> = listOf(
         location = "Germany",
         tip = "A control-oriented map focused on territory dominance, proactive CT play, long-range duels, and layered mid-round decision-making."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.train),
             MapVisual("Upper Radar", R.drawable.train_upper_radar),
@@ -98,7 +98,7 @@ val maps: List<Map> = listOf(
         location = "Russia",
         tip = "A positioning-focused map that highly rewards discipline, angle control, strong crossfire setups, and coordinated team movement."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.anubis),
             MapVisual("Radar", R.drawable.anubis_radar)
@@ -111,7 +111,7 @@ val maps: List<Map> = listOf(
         location = "Egypt",
         tip = "A tactically flexible, mid-control-oriented map that rewards coordinated map pressure, creative utility usage, and well-timed team executions."
     ),
-    Map(
+    GameMap(
         images = listOf(
             MapVisual("Overview", R.drawable.vertigo),
             MapVisual("Upper Radar", R.drawable.vertigo_upper_radar),

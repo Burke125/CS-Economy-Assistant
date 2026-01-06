@@ -5,7 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cseconomyassistant.data.database.equipment
+import com.example.cseconomyassistant.data.database.gameMaps
 import com.example.cseconomyassistant.data.database.weapons
+import com.example.cseconomyassistant.data.model.GameMap
 import com.example.cseconomyassistant.ui.screens.*
 
 sealed class Screen(val route: String, val title: String) {
@@ -14,6 +16,12 @@ sealed class Screen(val route: String, val title: String) {
     object Maps : Screen("maps", "Maps")
     object Guide : Screen("guide", "Guide")
     object History : Screen("history", "History")
+
+    object MapDetail : Screen("map_detail/{mapId}", "Map Detail") {
+        fun createRoute(mapId: String) = "map_detail/$mapId"
+    }
+
+
 }
 
 @Composable
@@ -34,7 +42,7 @@ fun AppNavGraph(navController: NavHostController) {
                 }
             )
         }
-        composable(Screen.Maps.route) { MapScreen() }
+        composable(Screen.Maps.route) { MapScreen(navController = navController) }
         composable(Screen.Guide.route) { EconomyGuideScreen() }
         composable(Screen.History.route) { HistoryScreen() }
 
@@ -56,6 +64,22 @@ fun AppNavGraph(navController: NavHostController) {
             val equipmentItem = equipment.find { it.id == equipmentId } ?: return@composable
             EquipmentDetailScreen(
                 equipment = equipmentItem,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screen.MapDetail.route
+        ) { backStackEntry ->
+            val mapId = backStackEntry.arguments
+                ?.getString("mapId")
+                ?: return@composable
+
+            val map = gameMaps.find { it.id == mapId }
+                ?: return@composable
+
+            MapDetailScreen(
+                gameMap = map,
                 onBack = { navController.popBackStack() }
             )
         }

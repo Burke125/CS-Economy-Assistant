@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.data.model.Weapon
 import com.example.cseconomyassistant.ui.theme.TextPrimary
-import com.example.cseconomyassistant.ui.theme.TextSecondary
 
 @Composable
 fun WeaponDetailScreen(
@@ -44,19 +43,21 @@ fun WeaponDetailScreen(
         )
 
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(text = "Price: $${weapon.price}", color = TextSecondary, fontSize = 14.sp)
-            Text(text = "Side: ${weapon.side.name}", color = TextSecondary, fontSize = 14.sp)
-            Text(text = "Type: ${weapon.type.name}", color = TextSecondary, fontSize = 14.sp)
-            Text(text = "Magazine: ${weapon.magazineSize}/${weapon.ammoReserve}", color = TextSecondary, fontSize = 14.sp)
-            Text(text = "Damage: ${weapon.damage}", color = TextSecondary, fontSize = 14.sp)
-            Text(text = "Kill award: $${weapon.killAward}", color = TextSecondary, fontSize = 14.sp)
+            Text(text = "Price: $${weapon.price}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Side: ${weapon.side.name}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Type: ${weapon.type.name}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Equipment slot: ${weapon.equipmentSlot}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Magazine: ${weapon.magazineSize}/${weapon.ammoReserve}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Damage: ${weapon.damage}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Headshot multiplier: ${weapon.headshotMultiplier}x", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Kill award: $${weapon.killAward}", color = TextPrimary, fontSize = 16.sp)
         }
 
         Text(
-            text = weapon.description,
+            text = "Description:\n${weapon.description}",
             color = TextPrimary,
             fontSize = 16.sp,
-            lineHeight = 20.sp
+            lineHeight = 22.sp
         )
 
         Button(

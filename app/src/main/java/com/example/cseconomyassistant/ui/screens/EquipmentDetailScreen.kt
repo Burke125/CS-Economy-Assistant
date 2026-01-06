@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.data.model.Equipment
 import com.example.cseconomyassistant.ui.theme.TextPrimary
-import com.example.cseconomyassistant.ui.theme.TextSecondary
 
 @Composable
 fun EquipmentDetailScreen(
@@ -44,16 +43,16 @@ fun EquipmentDetailScreen(
         )
 
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(text = "Price: $${equipment.price}", color = TextSecondary, fontSize = 14.sp)
-            Text(text = "Side: ${equipment.side.name}", color = TextSecondary, fontSize = 14.sp)
-            Text(text = "Slot: ${equipment.equipmentSlot.name}", color = TextSecondary, fontSize = 14.sp)
+            Text(text = "Price:  $${equipment.price}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Side:  ${equipment.side.name}", color = TextPrimary, fontSize = 16.sp)
+            Text(text = "Slot:  ${equipment.equipmentSlot.name}", color = TextPrimary, fontSize = 16.sp)
         }
 
         Text(
-            text = equipment.description,
+            text = "Description:\n${equipment.description}",
             color = TextPrimary,
             fontSize = 16.sp,
-            lineHeight = 20.sp
+            lineHeight = 22.sp
         )
 
         Button(

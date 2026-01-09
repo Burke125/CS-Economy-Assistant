@@ -7,8 +7,8 @@ import com.example.cseconomyassistant.data.model.MapVisual
 val gameMaps: List<GameMap> = listOf(
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.ancient),
-            MapVisual("Radar", R.drawable.ancient_radar)
+            MapVisual("Overview", R.drawable.map_ancient),
+            MapVisual("Radar", R.drawable.map_ancient_radar)
         ),
         id = "ancient",
         name = "Ancient",
@@ -20,8 +20,8 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.dust_2),
-            MapVisual("Radar", R.drawable.dust_2_radar)
+            MapVisual("Overview", R.drawable.map_dust_2),
+            MapVisual("Radar", R.drawable.map_dust_2_radar)
         ),
         id = "dust_2",
         name = "Dust II",
@@ -33,8 +33,8 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.inferno),
-            MapVisual("Radar", R.drawable.inferno_radar)
+            MapVisual("Overview", R.drawable.map_inferno),
+            MapVisual("Radar", R.drawable.map_inferno_radar)
         ),
         id = "inferno",
         name = "Inferno",
@@ -46,8 +46,8 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.mirage),
-            MapVisual("Radar", R.drawable.mirage_radar)
+            MapVisual("Overview", R.drawable.map_mirage),
+            MapVisual("Radar", R.drawable.map_mirage_radar)
         ),
         id = "mirage",
         name = "Mirage",
@@ -59,9 +59,9 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.nuke),
-            MapVisual("Upper Radar", R.drawable.nuke_upper_radar),
-            MapVisual("Lower Radar", R.drawable.nuke_lower_radar)
+            MapVisual("Overview", R.drawable.map_nuke),
+            MapVisual("Upper Radar", R.drawable.map_nuke_upper_radar),
+            MapVisual("Lower Radar", R.drawable.map_nuke_lower_radar)
         ),
         id = "nuke",
         name = "Nuke",
@@ -73,8 +73,8 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.overpass),
-            MapVisual("Radar", R.drawable.overpass_radar)
+            MapVisual("Overview", R.drawable.map_overpass),
+            MapVisual("Radar", R.drawable.map_overpass_radar)
         ),
         id = "overpass",
         name = "Overpass",
@@ -86,9 +86,9 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.train),
-            MapVisual("Upper Radar", R.drawable.train_upper_radar),
-            MapVisual("Lower Radar", R.drawable.train_lower_radar)
+            MapVisual("Overview", R.drawable.map_train),
+            MapVisual("Upper Radar", R.drawable.map_train_upper_radar),
+            MapVisual("Lower Radar", R.drawable.map_train_lower_radar)
         ),
         id = "train",
         name = "Train",
@@ -100,8 +100,8 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.anubis),
-            MapVisual("Radar", R.drawable.anubis_radar)
+            MapVisual("Overview", R.drawable.map_anubis),
+            MapVisual("Radar", R.drawable.map_anubis_radar)
         ),
         id = "anubis",
         name = "Anubis",
@@ -113,9 +113,9 @@ val gameMaps: List<GameMap> = listOf(
     ),
     GameMap(
         images = listOf(
-            MapVisual("Overview", R.drawable.vertigo),
-            MapVisual("Upper Radar", R.drawable.vertigo_upper_radar),
-            MapVisual("Lower Radar", R.drawable.vertigo_lower_radar)
+            MapVisual("Overview", R.drawable.map_vertigo),
+            MapVisual("Upper Radar", R.drawable.map_vertigo_upper_radar),
+            MapVisual("Lower Radar", R.drawable.map_vertigo_lower_radar)
         ),
         id = "vertigo",
         name = "Vertigo",

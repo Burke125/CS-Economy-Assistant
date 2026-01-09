@@ -8,7 +8,7 @@ import com.example.cseconomyassistant.data.model.WeaponType
 
 val weapons: List<Weapon> = listOf(
     Weapon(
-        image = R.drawable.p2000,
+        image = R.drawable.weapon_p2000,
         id = "p2000",
         name = "P2000",
         description = "Accurate and controllable, the German-made P2000 is a serviceable first-round pistol that works best against unarmored opponents.",
@@ -23,7 +23,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.usp_s,
+        image = R.drawable.weapon_usp_s,
         id = "usp_s",
         name = "USP-S",
         description = "A fan favorite from Counter-Strike: Source, the Silenced USP Pistol has a detachable silencer that gives shots less recoil while suppressing attention-getting noise.",
@@ -38,7 +38,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.glock_18,
+        image = R.drawable.weapon_glock_18,
         id = "glock_18",
         name = "Glock-18",
         description = "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts.",
@@ -53,7 +53,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.p250,
+        image = R.drawable.weapon_p250,
         id = "p250",
         name = "P250",
         description = "A low-recoil firearm with a high rate of fire, the P250 is a relatively inexpensive choice against armored opponents.",
@@ -68,7 +68,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.five_seven,
+        image = R.drawable.weapon_five_seven,
         id = "five_seven",
         name = "Five-SeveN",
         description = "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil.",
@@ -83,7 +83,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.tec_9,
+        image = R.drawable.weapon_tec_9,
         id = "tec_9",
         name = "Tec-9",
         description = "An ideal pistol for the Terrorist on the move, the Tec-9 is lethal in close quarters and features a high magazine capacity.",
@@ -98,7 +98,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.cz75_auto,
+        image = R.drawable.weapon_cz75_auto,
         id = "cz75_auto",
         name = "CZ75-Auto",
         description = "A fully automatic variant of the CZ75, the CZ75-Auto is another inexpensive choice against armored opponents. But with very little ammo provided, strong trigger discipline is required.",
@@ -113,7 +113,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.dual_berettas,
+        image = R.drawable.weapon_dual_berettas,
         id = "dual_berettas",
         name = "Dual Berretas",
         description = "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once.",
@@ -128,7 +128,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.desert_eagle,
+        image = R.drawable.weapon_desert_eagle,
         id = "desert_eagle",
         name = "Desert Eagle",
         description = "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range.",
@@ -143,7 +143,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.r8_revolver,
+        image = R.drawable.weapon_r8_revolver,
         id = "r8_revolver",
         name = "R8 Revolver",
         description = "The R8 Revolver delivers a highly accurate and powerful round at the expense of a lengthy trigger-pull. Firing rapidly by fanning the hammer may be the best option when point-blank stopping power is required.",
@@ -158,7 +158,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.nova,
+        image = R.drawable.weapon_nova,
         id = "nova",
         name = "Nova",
         description = "The Nova's rock-bottom price tag makes it a great ambush weapon for a cash-strapped team.",
@@ -173,7 +173,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 900
     ),
     Weapon(
-        image = R.drawable.xm1014,
+        image = R.drawable.weapon_xm1014,
         id = "xm1014",
         name = "XM1014",
         description = "The XM1014 is a powerful fully automatic shotgun that justifies its heftier price tag with the ability to paint a room with lead fast.",
@@ -188,7 +188,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 900
     ),
     Weapon(
-        image = R.drawable.mag_7,
+        image = R.drawable.weapon_mag_7,
         id = "mag_7",
         name = "MAG-7",
         description = "The CT-exclusive Mag-7 delivers a devastating amount of damage at close range. Its rapid magazine-style reloads make it a great tactical choice.",
@@ -203,7 +203,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 900
     ),
     Weapon(
-        image = R.drawable.sawed_off,
+        image = R.drawable.weapon_sawed_off,
         id = "sawed_off",
         name = "Sawed-Off",
         description = "The classic Sawed-Off deals very heavy close-range damage, but with its low accuracy, high spread and slow rate of fire, you'd better kill what you hit.",
@@ -218,7 +218,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 900
     ),
     Weapon(
-        image = R.drawable.mp9,
+        image = R.drawable.weapon_mp9,
         id = "mp9",
         name = "MP9",
         description = "Manufactured in Switzerland, the cutting-edge MP9 SMG is an ergonomic polymer weapon favored by private security firms.",
@@ -233,7 +233,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 600
     ),
     Weapon(
-        image = R.drawable.mac_10,
+        image = R.drawable.weapon_mac_10,
         id = "mac_10",
         name = "MAC-10",
         description = "Essentially a box that bullets come out of, the MAC-10 SMG boasts a high rate of fire, with poor spread accuracy and high recoil as trade-offs",
@@ -248,7 +248,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 600
     ),
     Weapon(
-        image = R.drawable.pp_bizon,
+        image = R.drawable.weapon_pp_bizon,
         id = "pp_bizon",
         name = "PP-Bizon",
         description = "The Bizon SMG is low-damage, but offers a uniquely designed high-capacity drum magazine that reloads quickly.",
@@ -263,7 +263,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 600
     ),
     Weapon(
-        image = R.drawable.mp7,
+        image = R.drawable.weapon_mp7,
         id = "mp7",
         name = "MP7",
         description = "Versatile but expensive, the German-made MP7 SMG is the perfect choice for high-impact close-range combat.",
@@ -278,7 +278,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 600
     ),
     Weapon(
-        image = R.drawable.p90,
+        image = R.drawable.weapon_p90,
         id = "p90",
         name = "P90",
         description = "Easily recognizable for its unique bullpup design, the P90 is a great weapon to shoot on the move due to its high-capacity magazine and low recoil.",
@@ -293,7 +293,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.ump_45,
+        image = R.drawable.weapon_ump_45,
         id = "ump_45",
         name = "UMP-45",
         description = "The misunderstood middle child of the SMG family, the UMP45's small magazine is the only drawback to an otherwise versatile close-quarters automatic.",
@@ -308,7 +308,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 600
     ),
     Weapon(
-        image = R.drawable.mp5_sd,
+        image = R.drawable.weapon_mp5_sd,
         id = "mp5_sd",
         name = "MP5-SD",
         description = "Often imitated but never equaled, the iconic MP5 is perhaps the most versatile and popular SMG in the world. This SD variant comes equipped with an integrated silencer, making an already formidable weapon whisper-quiet.",
@@ -323,7 +323,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 600
     ),
     Weapon(
-        image = R.drawable.famas,
+        image = R.drawable.weapon_famas,
         id = "famas",
         name = "FAMAS",
         description = "A cheap option for cash-strapped players, the FAMAS effectively fills the niche between more expensive rifles and the less-effective SMGs.",
@@ -338,7 +338,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.galil_ar,
+        image = R.drawable.weapon_galil_ar,
         id = "galil_ar",
         name = "Galil AR",
         description = "A less expensive option among the terrorist-exclusive assault rifles, the Galil AR is a serviceable weapon in medium to long-range combat.",
@@ -353,7 +353,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.m4a4,
+        image = R.drawable.weapon_m4a4,
         id = "m4a4",
         name = "M4A4",
         description = "More accurate but less damaging than its AK-47 counterpart, the M4A4 is the full-auto assault rifle of choice for CTs.",
@@ -368,7 +368,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.ak_47,
+        image = R.drawable.weapon_ak_47,
         id = "ak_47",
         name = "AK-47",
         description = "Powerful and reliable, the AK-47 is one of the most popular assault rifles in the world. It is most deadly in short, controlled bursts of fire.",
@@ -383,7 +383,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.m4a1_s,
+        image = R.drawable.weapon_m4a1_s,
         id = "m4a1_s",
         name = "M4A1-S",
         description = "With a smaller magazine than its unmuffled counterpart, the silenced M4A1 provides quieter shots with less recoil and better accuracy.",
@@ -398,7 +398,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.aug,
+        image = R.drawable.weapon_aug,
         id = "aug",
         name = "AUG",
         description = "Powerful and accurate, the AUG scoped assault rifle compensates for its long reload times with low spread and a high rate of fire.",
@@ -413,7 +413,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.sg_553,
+        image = R.drawable.weapon_sg_553,
         id = "sg_553",
         name = "SG 553",
         description = "The terrorist-exclusive SG 553 is a premium scoped alternative to the AK-47 for effective long-range engagement.",
@@ -428,7 +428,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.ssg_08,
+        image = R.drawable.weapon_ssg_08,
         id = "ssg_08",
         name = "SSG 08",
         description = "The SSG 08 bolt-action is a low-damage but very cost-effective sniper rifle, making it a smart choice for early-round long-range marksmanship.",
@@ -443,7 +443,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.awp,
+        image = R.drawable.weapon_awp,
         id = "awp",
         name = "AWP",
         description = "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy.",
@@ -458,7 +458,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 100
     ),
     Weapon(
-        image = R.drawable.scar_20,
+        image = R.drawable.weapon_scar_20,
         id = "scar_20",
         name = "SCAR-20",
         description = "The SCAR-20 is a semi-automatic sniper rifle that trades a high rate of fire and powerful long-distance damage for sluggish movement speed and big price tag.",
@@ -473,7 +473,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.g3sg1,
+        image = R.drawable.weapon_g3sg1,
         id = "g3sg1",
         name = "G3SG1",
         description = "The pricy G3SG1 lowers movement speed considerably but compensates with a higher rate of fire than other sniper rifles.",
@@ -488,7 +488,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.m249,
+        image = R.drawable.weapon_m249,
         id = "m249",
         name = "M249",
         description = "A strong open-area LMG, the M249 is the perfect choice for players willing to trade a slow fire rate for increased accuracy and a high ammo capacity.",
@@ -503,7 +503,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.negev,
+        image = R.drawable.weapon_negev,
         id = "negev",
         name = "Negev",
         description = "The Negev is a beast that can keep the enemy at bay with its pin-point supressive fire, provided you have the luxury of time to gain control over it.",
@@ -518,7 +518,7 @@ val weapons: List<Weapon> = listOf(
         killAward = 300
     ),
     Weapon(
-        image = R.drawable.zeus_x27,
+        image = R.drawable.weapon_zeus_x27,
         id = "zeus_x27",
         name = "Zeus x27",
         description = "Perfect for close-range ambushes and enclosed area encounters, the single-shot x27 Zeus is capable of incapacitating an enemy in a single hit.",

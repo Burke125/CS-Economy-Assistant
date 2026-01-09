@@ -102,9 +102,9 @@ fun MapImageCarousel(
                         .clip(CircleShape)
                         .background(
                             if (pagerState.currentPage == index)
-                                MaterialTheme.colorScheme.primary
-                            else
                                 MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                            else
+                                MaterialTheme.colorScheme.primary
                         )
                 )
             }

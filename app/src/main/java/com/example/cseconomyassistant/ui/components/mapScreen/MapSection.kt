@@ -1,5 +1,6 @@
 package com.example.cseconomyassistant.ui.components.mapScreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -11,6 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.data.database.gameMaps
@@ -31,6 +35,9 @@ fun MapSection(
             items = gameMaps,
             key = { it.id }
         ) { map ->
+
+            val previewImage = map.images.firstOrNull()
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -47,6 +54,19 @@ fun MapSection(
                     .padding(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                if (previewImage != null) {
+                    Image(
+                        painter = painterResource(id = previewImage.image),
+                        contentDescription = previewImage.label,
+                        modifier = Modifier
+                            .size(90.dp)
+                            .clip(RoundedCornerShape(6.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Spacer(modifier = Modifier.width(12.dp))
+                }
+
                 Column(
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(6.dp)

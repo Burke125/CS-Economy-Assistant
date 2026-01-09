@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.R
@@ -43,7 +42,7 @@ fun SideSelection(
                 selectedSide = Side.CT,
                 isSelected = selectedSide == Side.CT,
                 color = CTBlue,
-                icon = R.drawable.shield,
+                icon = R.drawable.icon_shield,
                 title = "Counter-Terrorist",
                 modifier = Modifier.weight(1f),
             ) { onSideSelected(Side.CT) }
@@ -52,7 +51,7 @@ fun SideSelection(
                 selectedSide = Side.T,
                 isSelected = selectedSide == Side.T,
                 color = TOrange,
-                icon = R.drawable.bomb,
+                icon = R.drawable.icon_bomb,
                 title = "Terrorist",
                 modifier = Modifier.weight(1f),
             ) { onSideSelected(Side.T) }

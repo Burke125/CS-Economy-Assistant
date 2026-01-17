@@ -59,7 +59,10 @@ fun MapSection(
                         painter = painterResource(id = previewImage.image),
                         contentDescription = previewImage.label,
                         modifier = Modifier
-                            .size(90.dp)
+                            .size(
+                                height = 90.dp,
+                                width = 120.dp
+                                )
                             .clip(RoundedCornerShape(6.dp)),
                         contentScale = ContentScale.Crop
                     )

@@ -7,8 +7,8 @@ import androidx.navigation.compose.composable
 import com.example.cseconomyassistant.data.database.equipment
 import com.example.cseconomyassistant.data.database.gameMaps
 import com.example.cseconomyassistant.data.database.weapons
-import com.example.cseconomyassistant.data.model.GameMap
 import com.example.cseconomyassistant.ui.screens.*
+import com.example.cseconomyassistant.ui.viewmodel.RoundViewModel
 
 sealed class Screen(val route: String, val title: String) {
     object Home : Screen("home", "Home")
@@ -16,22 +16,24 @@ sealed class Screen(val route: String, val title: String) {
     object Maps : Screen("maps", "Maps")
     object Guide : Screen("guide", "Guide")
     object History : Screen("history", "History")
+    object CalculatorResults : Screen("calculator_results", "Results")
 
     object MapDetail : Screen("map_detail/{mapId}", "Map Detail") {
         fun createRoute(mapId: String) = "map_detail/$mapId"
     }
-
-
 }
 
 @Composable
-fun AppNavGraph(navController: NavHostController) {
+fun AppNavGraph(
+    navController: NavHostController,
+    roundViewModel: RoundViewModel
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route,
-
     ) {
-        composable(Screen.Home.route) { HomeScreen(navController) }
+        composable(Screen.Home.route) { HomeScreen(navController, roundViewModel) }
+
         composable(Screen.Equipment.route) {
             EquipmentScreen(
                 onWeaponClick = { weapon ->
@@ -42,13 +44,14 @@ fun AppNavGraph(navController: NavHostController) {
                 }
             )
         }
+
         composable(Screen.Maps.route) { MapScreen(navController = navController) }
+
         composable(Screen.Guide.route) { EconomyGuideScreen() }
+
         composable(Screen.History.route) { HistoryScreen() }
 
-        composable(
-            route = "weapon_detail/{weaponId}"
-        ) { backStackEntry ->
+        composable("weapon_detail/{weaponId}") { backStackEntry ->
             val weaponId = backStackEntry.arguments?.getString("weaponId") ?: return@composable
             val weapon = weapons.find { it.id == weaponId } ?: return@composable
             WeaponDetailScreen(
@@ -57,9 +60,7 @@ fun AppNavGraph(navController: NavHostController) {
             )
         }
 
-        composable(
-            route = "equipment_detail/{equipmentId}"
-        ) { backStackEntry ->
+        composable("equipment_detail/{equipmentId}") { backStackEntry ->
             val equipmentId = backStackEntry.arguments?.getString("equipmentId") ?: return@composable
             val equipmentItem = equipment.find { it.id == equipmentId } ?: return@composable
             EquipmentDetailScreen(
@@ -68,18 +69,19 @@ fun AppNavGraph(navController: NavHostController) {
             )
         }
 
-        composable(
-            route = Screen.MapDetail.route
-        ) { backStackEntry ->
-            val mapId = backStackEntry.arguments
-                ?.getString("mapId")
-                ?: return@composable
-
-            val map = gameMaps.find { it.id == mapId }
-                ?: return@composable
-
+        composable(Screen.MapDetail.route) { backStackEntry ->
+            val mapId = backStackEntry.arguments?.getString("mapId") ?: return@composable
+            val map = gameMaps.find { it.id == mapId } ?: return@composable
             MapDetailScreen(
                 gameMap = map,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.CalculatorResults.route) {
+            ResultsScreen(
+                navController = navController,
+                roundViewModel = roundViewModel,
                 onBack = { navController.popBackStack() }
             )
         }

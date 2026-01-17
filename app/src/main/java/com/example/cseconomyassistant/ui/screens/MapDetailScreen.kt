@@ -4,16 +4,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cseconomyassistant.data.database.gameMaps
 import com.example.cseconomyassistant.data.model.GameMap
+import com.example.cseconomyassistant.ui.components.mapScreen.GalleryCarousel
 import com.example.cseconomyassistant.ui.components.mapScreen.MapImageCarousel
 import com.example.cseconomyassistant.ui.theme.TextPrimary
 
@@ -25,7 +27,8 @@ fun MapDetailScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
@@ -59,6 +62,20 @@ fun MapDetailScreen(
             lineHeight = 22.sp
         )
 
+        Text(
+            text = "Gallery:",
+            color = TextPrimary,
+            fontSize = 16.sp,
+            lineHeight = 22.sp
+        )
+
+        GalleryCarousel(
+            gallery = gameMap.gallery,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(240.dp)
+        )
+
         Button(
             onClick = { onBack() },
             modifier = Modifier.fillMaxWidth()
@@ -68,12 +85,3 @@ fun MapDetailScreen(
     }
 }
 
-@Preview
-@Composable
-fun MapDetailScreenPreview(){
-    val maps = gameMaps.first()
-    MapDetailScreen(
-        gameMap = maps,
-        onBack = {}
-    )
-}

@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.cseconomyassistant.data.model.RoundContext
 import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.data.model.Weapon
 import com.example.cseconomyassistant.ui.components.homeScreen.LossStreakInput
@@ -26,16 +27,22 @@ import com.example.cseconomyassistant.ui.components.homeScreen.PistolRoundToggle
 import com.example.cseconomyassistant.ui.components.homeScreen.SavedWeaponDropdown
 import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
 import com.example.cseconomyassistant.ui.components.homeScreen.SideSelection
+import com.example.cseconomyassistant.ui.components.homeScreen.TeamMoneyInputSlider
+import com.example.cseconomyassistant.ui.viewmodel.RoundViewModel
+
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController,
+    roundViewModel: RoundViewModel
+){
     var selectedSide by remember { mutableStateOf(Side.CT) }
     var isPistolRound by remember { mutableStateOf(false)}
     var currentMoney by remember { mutableIntStateOf(800) }
     var lossStreak by remember { mutableIntStateOf(0) }
     var hasSavedWeapon by remember { mutableStateOf(false) }
     var savedWeapon by remember { mutableStateOf<Weapon?>(null) }
-
+    var teamAverageMoney by remember { mutableIntStateOf(800) }
     val inputsLocked = isPistolRound
 
     Column(
@@ -63,6 +70,7 @@ fun HomeScreen(navController: NavController) {
                     lossStreak = 1
                     hasSavedWeapon = false
                     savedWeapon = null
+                    teamAverageMoney = 800
                 }else{
                     lossStreak = 0
                 }
@@ -81,6 +89,12 @@ fun HomeScreen(navController: NavController) {
             locked = inputsLocked
         )
 
+        TeamMoneyInputSlider(
+            teamMoney = teamAverageMoney,
+            onTeamMoneyChange = { teamAverageMoney = it },
+            locked = inputsLocked
+        )
+
         SavedWeaponDropdown(
             hasSavedWeapon = hasSavedWeapon,
             selectedWeapon = savedWeapon,
@@ -90,10 +104,23 @@ fun HomeScreen(navController: NavController) {
         )
 
         Button(
-            onClick = { navController.navigate("calculator_results") },
+            onClick = {
+                roundViewModel.setContext(
+                    RoundContext(
+                        side = selectedSide,
+                        isPistolRound = isPistolRound,
+                        currentMoney = currentMoney,
+                        lossStreak = lossStreak,
+                        savedWeapon = savedWeapon,
+                        teamAverageMoney = teamAverageMoney
+                    )
+                )
+                navController.navigate("calculator_results")
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Calculate Loadout")
         }
+
     }
 }

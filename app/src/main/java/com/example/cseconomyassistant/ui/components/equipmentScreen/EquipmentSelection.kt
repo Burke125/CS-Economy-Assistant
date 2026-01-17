@@ -39,7 +39,7 @@ fun EquipmentSelection(
             )
 
             EquipmentCategoryCard(
-                title = "Utility",
+                title = "Equipment",
                 isSelected = equipmentCategory == EquipmentCategory.EQUIPMENT,
                 onClick = { onEquipmentSelected(EquipmentCategory.EQUIPMENT) },
                 modifier = Modifier.weight(1f)

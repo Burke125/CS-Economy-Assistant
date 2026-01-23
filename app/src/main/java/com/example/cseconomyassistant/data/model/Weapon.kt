@@ -15,5 +15,6 @@ data class Weapon(
     val ammoReserve: Int,
     val damage: Int,
     val headshotMultiplier: Float,
-    val killAward: Int
+    val killAward: Int,
+    var inLoadout: Boolean = false
 )

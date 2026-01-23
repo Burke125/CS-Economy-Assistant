@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.cseconomyassistant.data.model.EquipmentSlot
-import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
 import com.example.cseconomyassistant.ui.viewmodel.RoundViewModel
 

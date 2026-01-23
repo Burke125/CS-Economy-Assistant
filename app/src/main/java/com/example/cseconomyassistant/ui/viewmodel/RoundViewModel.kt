@@ -7,11 +7,6 @@ import com.example.cseconomyassistant.data.database.weapons
 import com.example.cseconomyassistant.data.model.*
 
 class RoundViewModel : ViewModel() {
-
-    // -----------------------------
-    // STATE
-    // -----------------------------
-
     var roundContext = mutableStateOf<RoundContext?>(null)
         private set
 
@@ -22,10 +17,6 @@ class RoundViewModel : ViewModel() {
     fun clearContext() {
         roundContext.value = null
     }
-
-    // -----------------------------
-    // DATA FILTER HELPERS
-    // -----------------------------
 
     private fun weaponsForSide(side: Side): List<Weapon> =
         weapons.filter { it.side == side || it.side == Side.BOTH }
@@ -51,10 +42,6 @@ class RoundViewModel : ViewModel() {
     private fun armorAndKits() =
         equipment.filter { it.equipmentSlot == EquipmentSlot.NONE }
 
-    // -----------------------------
-    // EQUIPMENT HELPERS
-    // -----------------------------
-
     private fun isKevlar(e: Equipment) =
         e.name.contains("kevlar", ignoreCase = true)
 
@@ -67,18 +54,12 @@ class RoundViewModel : ViewModel() {
     private fun startingPistol(side: Side): Weapon? =
         pistols(side).firstOrNull { it.price == 0 }
 
-    // -----------------------------
-    // WEAPON SELECTION
-    // -----------------------------
-
     private fun selectWeapon(
         money: Int,
         buyType: BuyType,
         side: Side,
         savedWeapon: Weapon?
     ): Weapon? {
-
-        // Ako igrač već ima weapon – ne kupuj novi
         if (savedWeapon != null) return savedWeapon
 
         val availableWeapons = weaponsForSide(side)
@@ -112,10 +93,6 @@ class RoundViewModel : ViewModel() {
         }
     }
 
-    // -----------------------------
-    // EQUIPMENT SELECTION
-    // -----------------------------
-
     private fun selectEquipment(
         side: Side,
         buyType: BuyType
@@ -142,7 +119,6 @@ class RoundViewModel : ViewModel() {
                     defuse?.let { result += it }
                 }
 
-                // Max 4 grenade
                 result += grenades.take(4)
             }
 
@@ -153,21 +129,15 @@ class RoundViewModel : ViewModel() {
                     defuse?.let { result += it }
                 }
 
-                // Max 2 grenade
                 result += grenades.take(2)
             }
 
             BuyType.ECO -> {
-                // Ne kupujemo ništa
             }
         }
 
         return result
     }
-
-    // -----------------------------
-    // MAIN BUY CALCULATION
-    // -----------------------------
 
     fun calculateBuy(): BuyRecommendation? {
         val context = roundContext.value ?: return null
@@ -223,10 +193,6 @@ class RoundViewModel : ViewModel() {
             remainingMoney = remaining
         )
     }
-
-    // -----------------------------
-    // NEXT ROUND PREDICTION
-    // -----------------------------
 
     fun calculatePrediction(): RoundPrediction? {
 

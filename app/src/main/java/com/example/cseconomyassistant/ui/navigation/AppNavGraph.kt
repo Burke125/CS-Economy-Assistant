@@ -14,7 +14,7 @@ sealed class Screen(val route: String, val title: String) {
     object Home : Screen("home", "Home")
     object Equipment : Screen("equipment", "Equipment")
     object Maps : Screen("maps", "Maps")
-    object Guide : Screen("guide", "Guide")
+    object Loadout : Screen("loadout", "Loadout")
     object History : Screen("history", "History")
     object CalculatorResults : Screen("calculator_results", "Results")
 
@@ -47,7 +47,9 @@ fun AppNavGraph(
 
         composable(Screen.Maps.route) { MapScreen(navController = navController) }
 
-        composable(Screen.Guide.route) { EconomyGuideScreen() }
+        composable(Screen.Loadout.route) {
+            LoadoutScreen()
+        }
 
         composable(Screen.History.route) { HistoryScreen() }
 
@@ -85,5 +87,6 @@ fun AppNavGraph(
                 onBack = { navController.popBackStack() }
             )
         }
+
     }
 }

@@ -2,9 +2,9 @@ package com.example.cseconomyassistant.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Backpack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -19,7 +19,7 @@ fun BottomNavigationBar(navController: NavController) {
         Screen.Home,
         Screen.Equipment,
         Screen.Maps,
-        Screen.Guide,
+        Screen.Loadout,
         Screen.History
     )
 
@@ -38,7 +38,7 @@ fun BottomNavigationBar(navController: NavController) {
                             Screen.Home -> Icons.Default.Home
                             Screen.Equipment -> Icons.AutoMirrored.Filled.List
                             Screen.Maps -> Icons.Default.Map
-                            Screen.Guide -> Icons.Default.Info
+                            Screen.Loadout -> Icons.Filled.Backpack
                             Screen.History -> Icons.Default.History
                             else -> Icons.Default.Home
                         },

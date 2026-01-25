@@ -1,16 +1,33 @@
 package com.example.cseconomyassistant.ui.viewmodel
 
+import android.app.Application
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cseconomyassistant.data.database.weapons
 import com.example.cseconomyassistant.data.model.*
+import com.example.cseconomyassistant.data.repository.LoadoutRepository
+import kotlinx.coroutines.launch
 
-class LoadoutViewModel : ViewModel() {
+class LoadoutViewModel(
+    application: Application
+) : AndroidViewModel(application) {
+
+    private val repository = LoadoutRepository(application)
 
     val selectedSide = mutableStateOf(Side.CT)
 
     private val ctLoadout = mutableStateOf(defaultCtLoadout())
     private val tLoadout = mutableStateOf(defaultTLoadout())
+
+    init {
+        viewModelScope.launch {
+            repository.loadCt()?.let { ctLoadout.value = it }
+            repository.loadT()?.let { tLoadout.value = it }
+        }
+    }
 
     fun currentLoadout(): LoadoutState {
         return if (selectedSide.value == Side.CT) ctLoadout.value else tLoadout.value
@@ -24,25 +41,15 @@ class LoadoutViewModel : ViewModel() {
         }
     }
 
-    fun saveCurrentLoadout() {
-        val side = selectedSide.value
-        val loadout = currentLoadout()
-
-        // za sada samo drži u memoriji,
-        // kasnije ovo možeš spremati u DataStore / Room
-        if (side == Side.CT) {
-            ctLoadout.value = loadout
-        } else {
-            tLoadout.value = loadout
+    fun saveLoadouts() {
+        viewModelScope.launch {
+            repository.save(ctLoadout.value, tLoadout.value)
         }
     }
 
-    fun resetCurrentLoadout() {
-        if (selectedSide.value == Side.CT) {
-            ctLoadout.value = defaultCtLoadout()
-        } else {
-            tLoadout.value = defaultTLoadout()
-        }
+    fun resetLoadouts() {
+        ctLoadout.value = defaultCtLoadout()
+        tLoadout.value = defaultTLoadout()
     }
 
     fun changeSide(side: Side) {

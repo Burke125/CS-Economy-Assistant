@@ -26,17 +26,20 @@ import com.example.cseconomyassistant.ui.viewmodel.LoadoutViewModel
 import com.example.cseconomyassistant.data.model.Side
 import com.example.cseconomyassistant.ui.theme.BorderSubtle
 import com.example.cseconomyassistant.ui.theme.TextPrimary
+import com.example.cseconomyassistant.ui.viewmodel.RoundViewModel
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun LoadoutScreen(
-    viewModel: LoadoutViewModel = viewModel()
+    loadoutViewModel: LoadoutViewModel = viewModel(),
+    roundViewModel: RoundViewModel = viewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
-    val selectedSide = viewModel.selectedSide.value
-    val loadout = viewModel.currentLoadout()
+    val selectedSide = loadoutViewModel.selectedSide.value
+    val loadout = loadoutViewModel.currentLoadout()
 
     Scaffold(
         snackbarHost = {
@@ -66,16 +69,16 @@ fun LoadoutScreen(
 
             SideSelection(
                 selectedSide = selectedSide,
-                onSideSelected = { viewModel.changeSide(it) }
+                onSideSelected = { loadoutViewModel.changeSide(it) }
             )
 
             when (selectedSide) {
                 Side.CT -> {
                     CTLoadoutSection(
                         loadout = loadout,
-                        viewModel = viewModel,
+                        viewModel = loadoutViewModel,
                         onLoadoutChange = {
-                            viewModel.updateLoadout(it)
+                            loadoutViewModel.updateLoadout(it)
                         }
                     )
                 }
@@ -83,9 +86,9 @@ fun LoadoutScreen(
                 Side.T -> {
                     TLoadoutSection(
                         loadout = loadout,
-                        viewModel = viewModel,
+                        viewModel = loadoutViewModel,
                         onLoadoutChange = {
-                            viewModel.updateLoadout(it)
+                            loadoutViewModel.updateLoadout(it)
                         }
                     )
                 }
@@ -102,12 +105,14 @@ fun LoadoutScreen(
                     onClick = {
                         scope.launch {
                             try {
-                                viewModel.saveLoadouts()
+                                loadoutViewModel.saveLoadouts()
+                                roundViewModel.reloadLoadouts()
                                 snackbarHostState.showSnackbar(
                                     message = "Loadouts saved",
                                     duration = SnackbarDuration.Short,
                                     actionLabel = "X"
                                 )
+
                             } catch (e: Exception) {
                                 snackbarHostState.showSnackbar(
                                     message = "Failed to save loadout",
@@ -124,7 +129,7 @@ fun LoadoutScreen(
                 OutlinedButton(
                     modifier = Modifier.weight(1f),
                     onClick = {
-                        viewModel.resetLoadouts()
+                        loadoutViewModel.resetLoadouts()
                         scope.launch {
                             snackbarHostState.showSnackbar(
                                 message = "Loadouts reset",

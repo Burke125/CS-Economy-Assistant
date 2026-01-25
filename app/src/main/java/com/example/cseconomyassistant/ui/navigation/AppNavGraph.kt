@@ -1,6 +1,7 @@
 package com.example.cseconomyassistant.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -48,7 +49,10 @@ fun AppNavGraph(
         composable(Screen.Maps.route) { MapScreen(navController = navController) }
 
         composable(Screen.Loadout.route) {
-            LoadoutScreen()
+            LoadoutScreen(
+                loadoutViewModel = viewModel(),
+                roundViewModel = roundViewModel
+            )
         }
 
         composable(Screen.History.route) { HistoryScreen() }

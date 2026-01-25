@@ -1,14 +1,40 @@
 package com.example.cseconomyassistant.ui.viewmodel
 
+import android.app.Application
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.cseconomyassistant.data.database.equipment
-import com.example.cseconomyassistant.data.database.weapons
 import com.example.cseconomyassistant.data.model.*
+import com.example.cseconomyassistant.data.repository.LoadoutRepository
+import kotlinx.coroutines.launch
 
-class RoundViewModel : ViewModel() {
+class RoundViewModel(
+    application: Application
+) : AndroidViewModel(application) {
+
+    private val loadoutRepository =
+        LoadoutRepository(application.applicationContext)
     var roundContext = mutableStateOf<RoundContext?>(null)
         private set
+
+    private val ctLoadout = mutableStateOf<LoadoutState?>(null)
+    private val tLoadout = mutableStateOf<LoadoutState?>(null)
+
+    init {
+        viewModelScope.launch {
+            ctLoadout.value = loadoutRepository.loadCt()
+            tLoadout.value = loadoutRepository.loadT()
+        }
+    }
+
+    fun reloadLoadouts() {
+        viewModelScope.launch {
+            ctLoadout.value = loadoutRepository.loadCt()
+            tLoadout.value = loadoutRepository.loadT()
+        }
+    }
+
 
     fun setContext(context: RoundContext) {
         roundContext.value = context
@@ -18,29 +44,30 @@ class RoundViewModel : ViewModel() {
         roundContext.value = null
     }
 
-    private fun weaponsForSide(side: Side): List<Weapon> =
-        weapons.filter { it.side == side || it.side == Side.BOTH }
+    // -------------------------
+    // LOADOUT HELPERS
+    // -------------------------
+
+    private fun weaponsFromLoadout(side: Side): List<Weapon> {
+        val state = if (side == Side.CT) ctLoadout.value else tLoadout.value
+
+        return (state?.pistols.orEmpty() +
+                state?.midTier.orEmpty() +
+                state?.rifles.orEmpty())
+            .filterNotNull()
+    }
+
+    private fun startingPistolFromLoadout(side: Side): Weapon? {
+        val state = if (side == Side.CT) ctLoadout.value else tLoadout.value
+        return state?.pistols?.firstOrNull()
+    }
+
+    // -------------------------
+    // EQUIPMENT
+    // -------------------------
 
     private fun equipmentForSide(side: Side): List<Equipment> =
         equipment.filter { it.side == side || it.side == Side.BOTH }
-
-    private fun primaryWeapons(side: Side) =
-        weapons.filter {
-            it.equipmentSlot == EquipmentSlot.PRIMARY &&
-                    (it.side == side || it.side == Side.BOTH)
-        }
-
-    private fun pistols(side: Side) =
-        weapons.filter {
-            it.equipmentSlot == EquipmentSlot.SECONDARY &&
-                    (it.side == side || it.side == Side.BOTH)
-        }
-
-    private fun utility() =
-        equipment.filter { it.equipmentSlot == EquipmentSlot.UTILITY }
-
-    private fun armorAndKits() =
-        equipment.filter { it.equipmentSlot == EquipmentSlot.NONE }
 
     private fun isKevlar(e: Equipment) =
         e.name.contains("kevlar", ignoreCase = true)
@@ -51,24 +78,25 @@ class RoundViewModel : ViewModel() {
     private fun isDefuse(e: Equipment) =
         e.name.contains("defuse", ignoreCase = true)
 
-    private fun startingPistol(side: Side): Weapon? =
-        pistols(side).firstOrNull { it.price == 0 }
-
     private fun selectWeapon(
         money: Int,
         buyType: BuyType,
         side: Side,
-        savedWeapon: Weapon?
+        savedWeapon: Weapon?,
+        useSavedWeapon: Boolean
     ): Weapon? {
-        if (savedWeapon != null) return savedWeapon
 
-        val availableWeapons = weaponsForSide(side)
+        if (useSavedWeapon && savedWeapon != null) {
+            return savedWeapon
+        }
+
+        val loadoutWeapons = weaponsFromLoadout(side)
             .filter { it.price <= money }
 
         return when (buyType) {
 
             BuyType.FULL_BUY -> {
-                availableWeapons
+                loadoutWeapons
                     .filter {
                         it.type == WeaponType.RIFLE ||
                                 it.type == WeaponType.SNIPER
@@ -77,7 +105,7 @@ class RoundViewModel : ViewModel() {
             }
 
             BuyType.FORCE_BUY -> {
-                availableWeapons
+                loadoutWeapons
                     .filter {
                         it.type == WeaponType.SMG ||
                                 it.type == WeaponType.PISTOL
@@ -86,12 +114,13 @@ class RoundViewModel : ViewModel() {
             }
 
             BuyType.ECO -> {
-                availableWeapons
+                loadoutWeapons
                     .filter { it.type == WeaponType.PISTOL }
                     .maxByOrNull { it.price }
             }
         }
     }
+
 
     private fun selectEquipment(
         side: Side,
@@ -139,13 +168,21 @@ class RoundViewModel : ViewModel() {
         return result
     }
 
+    // -------------------------
+    // MAIN CALCULATION
+    // -------------------------
+
     fun calculateBuy(): BuyRecommendation? {
         val context = roundContext.value ?: return null
 
-        val money = context.currentMoney
         val side = context.side
-        val savedWeapon = context.savedWeapon
 
+        // Ako loadout još nije učitan – nemoj računati
+        val state = if (side == Side.CT) ctLoadout.value else tLoadout.value
+        if (state == null) return null
+
+        val money = context.currentMoney
+        val savedWeapon = context.savedWeapon
         val teamAverageMoney = context.teamAverageMoney
 
         val buyType = when {
@@ -170,8 +207,9 @@ class RoundViewModel : ViewModel() {
             money = money,
             buyType = buyType,
             side = side,
-            savedWeapon = savedWeapon
-        ) ?: startingPistol(side)
+            savedWeapon = savedWeapon,
+            useSavedWeapon = context.useSavedWeapon
+        ) ?: startingPistolFromLoadout(side)
 
         val selectedEquipment = selectEquipment(
             side = side,

@@ -112,7 +112,8 @@ fun HomeScreen(
                         currentMoney = currentMoney,
                         lossStreak = lossStreak,
                         savedWeapon = savedWeapon,
-                        teamAverageMoney = teamAverageMoney
+                        teamAverageMoney = teamAverageMoney,
+                        useSavedWeapon = hasSavedWeapon
                     )
                 )
                 navController.navigate("calculator_results")

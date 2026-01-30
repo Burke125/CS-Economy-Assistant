@@ -78,7 +78,7 @@ val weapons: List<Weapon> = listOf(
         side = Side.CT,
         magazineSize = 20,
         ammoReserve = 100,
-        damage = 31,
+        damage = 32,
         headshotMultiplier = 4f,
         killAward = 300
     ),
@@ -185,7 +185,7 @@ val weapons: List<Weapon> = listOf(
         ammoReserve = 32,
         damage = 20,
         headshotMultiplier = 4f,
-        killAward = 900
+        killAward = 600
     ),
     Weapon(
         image = R.drawable.weapon_mag_7,
@@ -252,7 +252,7 @@ val weapons: List<Weapon> = listOf(
         id = "pp_bizon",
         name = "PP-Bizon",
         description = "The Bizon SMG is low-damage, but offers a uniquely designed high-capacity drum magazine that reloads quickly.",
-        price = 1400,
+        price = 1300,
         type = WeaponType.SMG,
         equipmentSlot = EquipmentSlot.PRIMARY,
         side = Side.BOTH,
@@ -273,7 +273,7 @@ val weapons: List<Weapon> = listOf(
         side = Side.BOTH,
         magazineSize = 30,
         ammoReserve = 120,
-        damage = 29,
+        damage = 30,
         headshotMultiplier = 4f,
         killAward = 600
     ),
@@ -288,7 +288,7 @@ val weapons: List<Weapon> = listOf(
         side = Side.BOTH,
         magazineSize = 50,
         ammoReserve = 100,
-        damage = 25,
+        damage = 26,
         headshotMultiplier = 4f,
         killAward = 300
     ),
@@ -312,13 +312,13 @@ val weapons: List<Weapon> = listOf(
         id = "mp5_sd",
         name = "MP5-SD",
         description = "Often imitated but never equaled, the iconic MP5 is perhaps the most versatile and popular SMG in the world. This SD variant comes equipped with an integrated silencer, making an already formidable weapon whisper-quiet.",
-        price = 1500,
+        price = 1400,
         type = WeaponType.SMG,
         equipmentSlot = EquipmentSlot.PRIMARY,
         side = Side.BOTH,
         magazineSize = 30,
         ammoReserve = 120,
-        damage = 27,
+        damage = 28,
         headshotMultiplier = 4f,
         killAward = 600
     ),
@@ -378,7 +378,7 @@ val weapons: List<Weapon> = listOf(
         side = Side.T,
         magazineSize = 30,
         ammoReserve = 90,
-        damage = 35,
+        damage = 36,
         headshotMultiplier = 4f,
         killAward = 300
     ),

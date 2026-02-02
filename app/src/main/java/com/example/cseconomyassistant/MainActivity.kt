@@ -13,15 +13,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.example.cseconomyassistant.data.auth.AuthGate
 import com.example.cseconomyassistant.ui.navigation.AppNavGraph
 import com.example.cseconomyassistant.ui.navigation.BottomNavigationBar
 import com.example.cseconomyassistant.ui.theme.CSEconomyAssistantTheme
 import com.example.cseconomyassistant.ui.viewmodel.RoundViewModel
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        FirebaseApp.initializeApp(this)
+
+        val auth = FirebaseAuth.getInstance()
+
+        auth.signInAnonymously()
+            .addOnSuccessListener {
+                android.util.Log.d("AUTH_DEBUG", "Signed in, uid=${it.user?.uid}")
+            }
+            .addOnFailureListener { e ->
+                android.util.Log.e("AUTH_DEBUG", "Sign in failed", e)
+            }
 
         enableEdgeToEdge()
 
@@ -50,10 +65,12 @@ fun AppEntryPoint() {
                 .padding(paddingValues)
                 .consumeWindowInsets(paddingValues)
         ) {
-            AppNavGraph(
-                navController = navController,
-                roundViewModel = roundViewModel
-            )
+            AuthGate {
+                AppNavGraph(
+                    navController = navController,
+                    roundViewModel = roundViewModel
+                )
+            }
         }
     }
 }

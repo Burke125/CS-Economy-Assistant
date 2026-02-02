@@ -6,15 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.cseconomyassistant.data.model.BuyHistoryEntry
+import com.example.cseconomyassistant.data.auth.AuthManager
 import com.example.cseconomyassistant.data.repository.HistoryRepository
 import com.example.cseconomyassistant.ui.components.historyScreen.HistoryCard
 import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
@@ -22,16 +18,25 @@ import com.example.cseconomyassistant.ui.components.homeScreen.ScreenTitle
 @Composable
 fun HistoryScreen() {
 
-    val repository = remember { HistoryRepository() }
     var history by remember {
         mutableStateOf<List<Pair<String, BuyHistoryEntry>>>(emptyList())
     }
 
+    var repository by remember {
+        mutableStateOf<HistoryRepository?>(null)
+    }
+
     LaunchedEffect(Unit) {
-        repository.observeHistory {
-            history = it
+        AuthManager.ensureSignedIn { uid ->
+            val repo = HistoryRepository(uid)
+            repository = repo
+
+            repo.observeHistory {
+                history = it
+            }
         }
     }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,10 +61,12 @@ fun HistoryScreen() {
                 HistoryCard(
                     id = id,
                     entry = entry,
-                    onDelete = { repository.delete(it) }
+                    onDelete = { deleteId ->
+                        repository?.delete(deleteId)
+                    }
                 )
             }
-
         }
     }
 }
+

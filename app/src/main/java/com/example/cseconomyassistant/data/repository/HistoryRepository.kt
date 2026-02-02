@@ -3,11 +3,15 @@ package com.example.cseconomyassistant.data.repository
 import com.example.cseconomyassistant.data.model.BuyHistoryEntry
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.auth.FirebaseAuth
 
-class HistoryRepository {
+class HistoryRepository(private val uid: String) {
 
     private val db = FirebaseFirestore.getInstance()
-    private val collection = db.collection("buy_history")
+    private val collection =
+        db.collection("users")
+            .document(uid)
+            .collection("buy_history")
 
     fun save(entry: BuyHistoryEntry) {
         collection.add(entry)
@@ -17,13 +21,11 @@ class HistoryRepository {
         collection
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, _ ->
-                val list = snapshot
-                    ?.documents
+                val list = snapshot?.documents
                     ?.mapNotNull { doc ->
                         doc.toObject(BuyHistoryEntry::class.java)
                             ?.let { doc.id to it }
-                    }
-                    ?: emptyList()
+                    } ?: emptyList()
 
                 onChange(list)
             }
@@ -33,4 +35,5 @@ class HistoryRepository {
         collection.document(id).delete()
     }
 }
+
 

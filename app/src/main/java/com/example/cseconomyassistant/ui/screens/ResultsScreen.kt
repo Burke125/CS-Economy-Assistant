@@ -33,7 +33,7 @@ fun ResultsScreen(
     if (recommendation == null || prediction == null) return
 
     LaunchedEffect(Unit) {
-        roundViewModel.saveToHistory(roundViewModel, recommendation)
+        roundViewModel.saveToHistory(recommendation)
     }
 
     Column(

@@ -5,9 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cseconomyassistant.data.database.equipment
+import com.example.cseconomyassistant.data.database.weapons
 import com.example.cseconomyassistant.data.model.*
+import com.example.cseconomyassistant.data.auth.AuthManager
 import com.example.cseconomyassistant.data.repository.HistoryRepository
 import com.example.cseconomyassistant.data.repository.LoadoutRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class RoundViewModel(
@@ -25,8 +28,9 @@ class RoundViewModel(
     var roundContext = mutableStateOf<RoundContext?>(null)
         private set
 
-    private val ctLoadout = mutableStateOf<LoadoutState?>(null)
-    private val tLoadout = mutableStateOf<LoadoutState?>(null)
+    private val ctLoadout = mutableStateOf(defaultCtLoadout())
+    private val tLoadout = mutableStateOf(defaultTLoadout())
+
 
     init {
         reloadLoadouts()
@@ -34,19 +38,21 @@ class RoundViewModel(
 
     fun reloadLoadouts() {
         viewModelScope.launch {
-            ctLoadout.value = loadoutRepository.loadCt()
-            tLoadout.value = loadoutRepository.loadT()
+            loadoutRepository.loadCt()?.let {
+                ctLoadout.value = it
+            }
+
+            loadoutRepository.loadT()?.let {
+                tLoadout.value = it
+            }
         }
     }
+
 
     fun setContext(context: RoundContext) {
         roundContext.value = context
     }
-/*
-    fun clearContext() {
-        roundContext.value = null
-    }
-*/
+
     private fun weaponsFromLoadout(side: Side): List<Weapon> {
         val state = if (side == Side.CT) ctLoadout.value else tLoadout.value
 
@@ -333,19 +339,14 @@ class RoundViewModel(
         )
     }
 
-    fun saveToHistory(
-        roundViewModel: RoundViewModel,
-        recommendation: BuyRecommendation
-    ) {
-        val context = roundViewModel.roundContext.value ?: return
+    fun saveToHistory(recommendation: BuyRecommendation) {
+        val context = roundContext.value ?: return
 
         val entry = BuyHistoryEntry(
             side = context.side.name,
             buyType = recommendation.buyType.name,
-
             weaponId = recommendation.weapon?.id,
             weaponName = recommendation.weapon?.name,
-
             armor = when {
                 recommendation.equipment.any { it.name.contains("helmet", true) } ->
                     "Kevlar + Helmet"
@@ -353,24 +354,78 @@ class RoundViewModel(
                     "Kevlar"
                 else -> "None"
             },
-
             hasDefuse = recommendation.equipment.any {
                 it.name.contains("defuse", true)
             },
-
             utility = recommendation.equipment
                 .filter { it.equipmentSlot == EquipmentSlot.UTILITY }
                 .map { it.name },
-
             totalCost = recommendation.totalCost,
             remainingMoney = recommendation.remainingMoney,
-
             myMoney = context.currentMoney,
             teamMoney = context.teamAverageMoney,
             lossStreak = context.lossStreak
         )
 
-        HistoryRepository().save(entry)
+        AuthManager.ensureSignedIn { uid ->
+            HistoryRepository(uid).save(entry)
+        }
     }
 
+    private fun defaultCtLoadout(): LoadoutState {
+
+        val usp = weapons.first { it.name == "USP-S" }
+
+        val p250 = weapons.first { it.name == "P250" }
+        val dualBerretas = weapons.first { it.name == "Dual Berretas" }
+        val fiveSeven = weapons.first { it.name == "Five-SeveN" }
+        val desertEagle = weapons.first { it.name == "Desert Eagle" }
+
+        val mp9 = weapons.first { it.name == "MP9" }
+        val ump45 = weapons.first { it.name == "UMP-45" }
+        val p90 = weapons.first { it.name == "P90" }
+        val xm1014 = weapons.first { it.name == "XM1014" }
+        val mp5sd = weapons.first { it.name == "MP5-SD" }
+
+        val famas = weapons.first { it.name == "FAMAS" }
+        val m4a1s = weapons.first { it.name == "M4A1-S" }
+        val m4a4 = weapons.first { it.name == "M4A4" }
+        val aug = weapons.first { it.name == "AUG" }
+        val awp = weapons.first { it.name == "AWP" }
+
+
+        return LoadoutState(
+            pistols = listOf(usp, p250, dualBerretas, fiveSeven, desertEagle),
+            midTier = listOf(mp9, ump45, p90, xm1014, mp5sd),
+            rifles = listOf(famas, m4a1s, m4a4, aug, awp)
+        )
+    }
+
+    private fun defaultTLoadout(): LoadoutState {
+
+        val glock = weapons.first { it.name == "Glock-18" }
+
+        val p250 = weapons.first { it.name == "P250" }
+        val cz75auto = weapons.first { it.name == "CZ75-Auto" }
+        val tec9 = weapons.first { it.name == "Tec-9" }
+        val desertEagle = weapons.first { it.name == "Desert Eagle" }
+
+        val mac10 = weapons.first { it.name == "MAC-10" }
+        val mp7 = weapons.first { it.name == "MP7" }
+        val mp9 = weapons.first { it.name == "MP9" }
+        val ppbizon = weapons.first { it.name == "PP-Bizon" }
+        val ump45 = weapons.first { it.name == "UMP-45" }
+
+        val ak = weapons.first { it.name == "AK-47" }
+        val galilar = weapons.first { it.name == "Galil AR" }
+        val sg553 = weapons.first { it.name == "SG 553" }
+        val awp = weapons.first { it.name == "AWP" }
+        val ssg08 = weapons.first { it.name == "SSG 08" }
+
+        return LoadoutState(
+            pistols = listOf(glock, p250, cz75auto, tec9, desertEagle),
+            midTier = listOf(mac10, mp7, mp9, ppbizon, ump45),
+            rifles = listOf(galilar, ak, ssg08, sg553, awp)
+        )
+    }
 }

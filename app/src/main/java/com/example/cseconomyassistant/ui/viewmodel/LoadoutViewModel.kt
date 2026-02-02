@@ -3,9 +3,7 @@ package com.example.cseconomyassistant.ui.viewmodel
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cseconomyassistant.data.database.weapons
 import com.example.cseconomyassistant.data.model.*
 import com.example.cseconomyassistant.data.repository.LoadoutRepository
@@ -57,23 +55,20 @@ class LoadoutViewModel(
     }
 
     private fun defaultCtLoadout(): LoadoutState {
-        //Starting pistol
+
         val usp = weapons.first { it.name == "USP-S" }
 
-        //Other pistols
         val p250 = weapons.first { it.name == "P250" }
         val dualBerretas = weapons.first { it.name == "Dual Berretas" }
         val fiveSeven = weapons.first { it.name == "Five-SeveN" }
         val desertEagle = weapons.first { it.name == "Desert Eagle" }
 
-        //Mid-Tier
         val mp9 = weapons.first { it.name == "MP9" }
         val ump45 = weapons.first { it.name == "UMP-45" }
         val p90 = weapons.first { it.name == "P90" }
         val xm1014 = weapons.first { it.name == "XM1014" }
         val mp5sd = weapons.first { it.name == "MP5-SD" }
 
-        //Rifles
         val famas = weapons.first { it.name == "FAMAS" }
         val m4a1s = weapons.first { it.name == "M4A1-S" }
         val m4a4 = weapons.first { it.name == "M4A4" }
@@ -89,23 +84,20 @@ class LoadoutViewModel(
     }
 
     private fun defaultTLoadout(): LoadoutState {
-        //Starting pistol
+
         val glock = weapons.first { it.name == "Glock-18" }
 
-        //Other pistols
         val p250 = weapons.first { it.name == "P250" }
         val cz75auto = weapons.first { it.name == "CZ75-Auto" }
         val tec9 = weapons.first { it.name == "Tec-9" }
         val desertEagle = weapons.first { it.name == "Desert Eagle" }
 
-        //Mid-Tier
         val mac10 = weapons.first { it.name == "MAC-10" }
         val mp7 = weapons.first { it.name == "MP7" }
         val mp9 = weapons.first { it.name == "MP9" }
         val ppbizon = weapons.first { it.name == "PP-Bizon" }
         val ump45 = weapons.first { it.name == "UMP-45" }
 
-        //Rifles
         val ak = weapons.first { it.name == "AK-47" }
         val galilar = weapons.first { it.name == "Galil AR" }
         val sg553 = weapons.first { it.name == "SG 553" }
@@ -117,20 +109,6 @@ class LoadoutViewModel(
             midTier = listOf(mac10, mp7, mp9, ppbizon, ump45),
             rifles = listOf(galilar, ak, ssg08, sg553, awp)
         )
-    }
-
-
-    private fun enforceTGlock() {
-        val glock = weapons.firstOrNull { it.name == "Glock-18" } ?: return
-        val updated = tLoadout.value.pistols.toMutableList()
-        updated[0] = glock
-        tLoadout.value = tLoadout.value.copy(pistols = updated)
-    }
-
-    fun isSlotLocked(loadoutClass: LoadoutClass, index: Int): Boolean {
-        return selectedSide.value == Side.T &&
-                loadoutClass == LoadoutClass.PISTOLS &&
-                index == 0
     }
 
     fun isWeaponAlreadyUsed(weapon: Weapon): Boolean {
@@ -186,38 +164,6 @@ class LoadoutViewModel(
                     it.type in listOf(WeaponType.RIFLE, WeaponType.SNIPER) &&
                             (it.side == side || it.side == Side.BOTH)
                 }
-        }
-    }
-
-    private fun pistolOptions(side: Side, slotIndex: Int): List<Weapon> {
-        val pistols = weapons.filter { it.type == WeaponType.PISTOL }
-
-        return when (side) {
-
-            Side.CT -> {
-                if (slotIndex == 0) {
-                    pistols.filter {
-                        it.name == "USP-S" || it.name == "P2000"
-                    }
-                } else {
-                    pistols.filter {
-                        it.name != "USP-S" &&
-                                it.name != "P2000" &&
-                                (it.side == Side.CT || it.side == Side.BOTH)
-                    }
-                }
-            }
-
-            else -> {
-                if (slotIndex == 0) {
-                    pistols.filter { it.name == "Glock-18" }
-                } else {
-                    pistols.filter {
-                        it.name != "Glock-18" &&
-                                (it.side == Side.T || it.side == Side.BOTH)
-                    }
-                }
-            }
         }
     }
 

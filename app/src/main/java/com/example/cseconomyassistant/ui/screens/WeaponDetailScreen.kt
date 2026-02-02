@@ -1,6 +1,8 @@
 package com.example.cseconomyassistant.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -13,6 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cseconomyassistant.data.model.Weapon
+import com.example.cseconomyassistant.ui.theme.BorderSubtle
+import com.example.cseconomyassistant.ui.theme.SurfaceVariant
 import com.example.cseconomyassistant.ui.theme.TextPrimary
 
 @Composable
@@ -36,12 +40,20 @@ fun WeaponDetailScreen(
             painter = painterResource(id = weapon.image),
             contentDescription = weapon.name,
             modifier = Modifier
+                .background(
+                    color = SurfaceVariant,
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .border(
+                    width = 2.dp,
+                    color = BorderSubtle,
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .fillMaxWidth()
                 .height(200.dp)
                 .clip(RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Fit
         )
-
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(text = "Price: $${weapon.price}", color = TextPrimary, fontSize = 16.sp)
             Text(text = "Side: ${weapon.side.name}", color = TextPrimary, fontSize = 16.sp)

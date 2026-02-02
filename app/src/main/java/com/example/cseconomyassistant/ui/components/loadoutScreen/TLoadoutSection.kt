@@ -13,17 +13,11 @@ import com.example.cseconomyassistant.ui.viewmodel.LoadoutViewModel
 fun TLoadoutSection(
     loadout: LoadoutState,
     viewModel: LoadoutViewModel,
-    onLoadoutChange: (LoadoutState) -> Unit
 ) {
 
     var pickerState by remember {
         mutableStateOf<Pair<LoadoutClass, Int>?>(null)
     }
-
-    val options = viewModel.getWeaponsForSlot(
-        loadoutClass = LoadoutClass.PISTOLS,
-        index = 0
-    )
 
     Column(
         modifier = Modifier.fillMaxSize(),

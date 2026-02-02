@@ -14,7 +14,7 @@ fun TeamMoneyInputSlider(
     onTeamMoneyChange: (Int) -> Unit,
     locked: Boolean
 ) {
-    var sliderValue by remember { mutableStateOf(teamMoney.toFloat()) }
+    var sliderValue by remember { mutableFloatStateOf(teamMoney.toFloat()) }
     var text by remember { mutableStateOf(teamMoney.toString()) }
 
     LaunchedEffect(teamMoney) {

@@ -35,7 +35,7 @@ fun LoadoutScreen(
     loadoutViewModel: LoadoutViewModel = viewModel(),
     roundViewModel: RoundViewModel = viewModel()
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
     val selectedSide = loadoutViewModel.selectedSide.value
@@ -43,7 +43,7 @@ fun LoadoutScreen(
 
     Scaffold(
         snackbarHost = {
-            SnackbarHost(snackbarHostState) { data ->
+            SnackbarHost(snackBarHostState) { data ->
                 Snackbar(
                     containerColor = BorderSubtle,
                     contentColor = TextPrimary,
@@ -58,7 +58,7 @@ fun LoadoutScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
@@ -76,20 +76,14 @@ fun LoadoutScreen(
                 Side.CT -> {
                     CTLoadoutSection(
                         loadout = loadout,
-                        viewModel = loadoutViewModel,
-                        onLoadoutChange = {
-                            loadoutViewModel.updateLoadout(it)
-                        }
+                        viewModel = loadoutViewModel
                     )
                 }
 
                 Side.T -> {
                     TLoadoutSection(
                         loadout = loadout,
-                        viewModel = loadoutViewModel,
-                        onLoadoutChange = {
-                            loadoutViewModel.updateLoadout(it)
-                        }
+                        viewModel = loadoutViewModel
                     )
                 }
 
@@ -107,14 +101,14 @@ fun LoadoutScreen(
                             try {
                                 loadoutViewModel.saveLoadouts()
                                 roundViewModel.reloadLoadouts()
-                                snackbarHostState.showSnackbar(
+                                snackBarHostState.showSnackbar(
                                     message = "Loadouts saved",
                                     duration = SnackbarDuration.Short,
                                     actionLabel = "X"
                                 )
 
                             } catch (e: Exception) {
-                                snackbarHostState.showSnackbar(
+                                snackBarHostState.showSnackbar(
                                     message = "Failed to save loadout",
                                     duration = SnackbarDuration.Short,
                                     actionLabel = "X"
@@ -131,7 +125,7 @@ fun LoadoutScreen(
                     onClick = {
                         loadoutViewModel.resetLoadouts()
                         scope.launch {
-                            snackbarHostState.showSnackbar(
+                            snackBarHostState.showSnackbar(
                                 message = "Loadouts reset",
                                 duration = SnackbarDuration.Short,
                                 actionLabel = "X"

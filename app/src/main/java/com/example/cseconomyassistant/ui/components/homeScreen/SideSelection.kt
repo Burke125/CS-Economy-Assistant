@@ -44,7 +44,6 @@ fun SideSelection(
                 color = CTBlue,
                 icon = R.drawable.icon_shield,
                 title = "Counter-Terrorist",
-                modifier = Modifier.weight(1f),
             ) { onSideSelected(Side.CT) }
 
             SideCard(
@@ -53,7 +52,6 @@ fun SideSelection(
                 color = TOrange,
                 icon = R.drawable.icon_bomb,
                 title = "Terrorist",
-                modifier = Modifier.weight(1f),
             ) { onSideSelected(Side.T) }
         }
     }
@@ -66,7 +64,6 @@ private fun SideCard(
     color: Color,
     icon: Int,
     title: String,
-    modifier: Modifier,
     onClick: () -> Unit
 ) {
     Box(

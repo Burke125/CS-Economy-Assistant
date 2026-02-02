@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "652303784598",
+    "project_id": "cs-economy-assistant",
+    "storage_bucket": "cs-economy-assistant.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652303784598:android:7d0e5784567410113140b7",
+        "android_client_info": {
+          "package_name": "com.example.cseconomyassistant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCLszZAkelA4E41On64geBeFlwww9Ye9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

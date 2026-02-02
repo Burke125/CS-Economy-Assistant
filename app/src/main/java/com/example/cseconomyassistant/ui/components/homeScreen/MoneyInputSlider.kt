@@ -14,7 +14,7 @@ fun MoneyInputSlider(
     onMoneyChange: (Int) -> Unit,
     locked: Boolean
 ) {
-    var sliderValue by remember { mutableStateOf(currentMoney.toFloat()) }
+    var sliderValue by remember { mutableFloatStateOf(currentMoney.toFloat()) }
     var text by remember { mutableStateOf(currentMoney.toString()) }
 
     LaunchedEffect(currentMoney) {

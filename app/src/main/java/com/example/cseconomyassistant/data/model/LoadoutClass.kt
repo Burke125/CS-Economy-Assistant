@@ -5,3 +5,5 @@ enum class LoadoutClass {
     MID_TIER,
     RIFLES
 }
+
+

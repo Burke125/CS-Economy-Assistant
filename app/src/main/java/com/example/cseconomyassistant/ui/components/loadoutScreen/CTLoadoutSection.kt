@@ -13,7 +13,6 @@ import com.example.cseconomyassistant.ui.viewmodel.LoadoutViewModel
 fun CTLoadoutSection(
     loadout: LoadoutState,
     viewModel: LoadoutViewModel,
-    onLoadoutChange: (LoadoutState) -> Unit
 ) {
     var pickerState by remember {
         mutableStateOf<Pair<LoadoutClass, Int>?>(null)

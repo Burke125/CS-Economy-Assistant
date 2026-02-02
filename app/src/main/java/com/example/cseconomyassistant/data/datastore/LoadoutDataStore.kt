@@ -7,7 +7,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.example.cseconomyassistant.data.database.weapons
 import com.example.cseconomyassistant.data.model.LoadoutState
 import kotlinx.coroutines.flow.first
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 

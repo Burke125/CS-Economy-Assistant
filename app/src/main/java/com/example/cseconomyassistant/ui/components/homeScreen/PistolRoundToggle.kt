@@ -20,7 +20,6 @@ import com.example.cseconomyassistant.ui.theme.TOrange
 import com.example.cseconomyassistant.ui.theme.TOrangeDark
 import com.example.cseconomyassistant.ui.theme.TextPrimary
 
-
 @Composable
 fun PistolRoundToggle(
     isPistolRound: Boolean,
